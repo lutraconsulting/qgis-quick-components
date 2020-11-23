@@ -74,5 +74,8 @@ QVariant QgsQuickAttributeFormModel::attribute( const QString &name ) const
 
 bool QgsQuickAttributeFormModel::filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const
 {
-  return mSourceModel->data( mSourceModel->index( source_row, 0, source_parent ), CurrentlyVisible ).toBool();
+  Q_UNUSED( source_row );
+  Q_UNUSED( source_parent );
+  return true;
+//  return mSourceModel->data( mSourceModel->index( source_row, 0, source_parent ), CurrentlyVisible ).toBool();
 }

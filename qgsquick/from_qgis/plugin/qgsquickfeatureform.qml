@@ -255,6 +255,7 @@ Item {
         Repeater {
           model: form.model
 
+
           TabButton {
             id: tabButton
             text: Name
@@ -265,6 +266,7 @@ Item {
             width: leftPadding + rightPadding
             height: form.style.tabs.buttonHeight
 
+            visible: model.CurrentlyVisible
             contentItem: Text {
               // Make sure the width is derived from the text so we can get wider
               // than the parent item and the Flickable is useful

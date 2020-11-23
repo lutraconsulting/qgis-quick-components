@@ -41,6 +41,7 @@ QHash<int, QByteArray> QgsQuickAttributeFormModelBase::roleNames() const
   roles[QgsQuickAttributeFormModel::RememberValue] = QByteArray( "RememberValue" );
   roles[QgsQuickAttributeFormModel::Field] = QByteArray( "Field" );
   roles[QgsQuickAttributeFormModel::Group] = QByteArray( "Group" );
+  roles[QgsQuickAttributeFormModel::CurrentlyVisible] = QByteArray( "CurrentlyVisible" );
   roles[QgsQuickAttributeFormModel::ConstraintHardValid] = "ConstraintHardValid";
   roles[QgsQuickAttributeFormModel::ConstraintSoftValid] = "ConstraintSoftValid";
   roles[QgsQuickAttributeFormModel::ConstraintDescription] = QByteArray( "ConstraintDescription" );

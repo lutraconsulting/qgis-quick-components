@@ -14,6 +14,7 @@
  ***************************************************************************/
 
 #include "qgsquicksubmodel.h"
+#include "qdebug.h"
 
 QgsQuickSubModel::QgsQuickSubModel( QObject *parent )
   : QAbstractItemModel( parent )
@@ -91,6 +92,7 @@ void QgsQuickSubModel::setRootIndex( const QModelIndex &rootIndex )
   if ( rootIndex == mRootIndex )
     return;
 
+  qDebug() << "Reseting model index for " << this << " old index " << mRootIndex << " new " << rootIndex;
   beginResetModel();
   mRootIndex = rootIndex;
   endResetModel();
@@ -124,7 +126,13 @@ void QgsQuickSubModel::setModel( QAbstractItemModel *model )
 
 void QgsQuickSubModel::onRowsAboutToBeInserted( const QModelIndex &parent, int first, int last )
 {
-  beginInsertRows( mapFromSource( parent ), first, last );
+  if ( parent == mRootIndex )
+  {
+    qDebug() << "Start insert " << this << first << last << parent;
+    beginInsertRows( mapFromSource( parent ), first, last );
+  }
+  else
+    qDebug() << "Ignore start insert " << this << first << last << parent;
 }
 
 void QgsQuickSubModel::onRowsInserted( const QModelIndex &parent, int first, int last )
@@ -132,12 +140,26 @@ void QgsQuickSubModel::onRowsInserted( const QModelIndex &parent, int first, int
   Q_UNUSED( parent )
   Q_UNUSED( first )
   Q_UNUSED( last )
-  endInsertRows();
+  if ( parent == mRootIndex )
+  {
+    qDebug() << "End insert" << this << " f: " << first << " l:" << last << parent;
+    endInsertRows();
+  }
+  else
+    qDebug() << "Ignore end insert " << this << first << last << parent;
 }
 
 void QgsQuickSubModel::onRowsAboutToBeRemoved( const QModelIndex &parent, int first, int last )
 {
-  beginRemoveRows( mapFromSource( parent ), first, last );
+  if ( parent == mRootIndex )
+  {
+    qDebug() << "Start remove " << this << first << last << parent;
+    beginRemoveRows( mapFromSource( parent ), first, last );
+
+  }
+  else qDebug() << "Ignore Start remove " << this << first << last << parent;
+
+  mModel->data( mRootIndex, QgsQuickAttributeFormModel::FeatureFieldRoles::CurrentlyVisible );
 }
 
 void QgsQuickSubModel::onRowsRemoved( const QModelIndex &parent, int first, int last )
@@ -145,7 +167,12 @@ void QgsQuickSubModel::onRowsRemoved( const QModelIndex &parent, int first, int 
   Q_UNUSED( parent )
   Q_UNUSED( first )
   Q_UNUSED( last )
-  endRemoveRows();
+  if ( parent == mRootIndex )
+  {
+    qDebug() << "End remove " << this << first << last << parent;
+    endRemoveRows();
+  }
+  else qDebug() << "Ignore End remove " << this << first << last << parent;
 }
 
 void QgsQuickSubModel::onModelAboutToBeReset()
