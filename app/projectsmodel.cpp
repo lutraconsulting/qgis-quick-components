@@ -34,6 +34,7 @@ ProjectModel::~ProjectModel() {}
 
 void ProjectModel::findProjectFiles()
 {
+  beginResetModel();
   // populate from mLocalProjects
   mProjectFiles.clear();
   const QList<LocalProjectInfo> projects = mLocalProjects.projects();
@@ -61,6 +62,7 @@ void ProjectModel::findProjectFiles()
   }
 
   std::sort( mProjectFiles.begin(), mProjectFiles.end() );
+  endResetModel();
 }
 
 

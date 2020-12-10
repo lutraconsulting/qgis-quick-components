@@ -94,6 +94,8 @@ void TestMerginApi::initTestCase()
   deleteRemoteProject( mApiExtra, mUsername, "testDiffUpdateWithRebaseFailed" );
   deleteRemoteProject( mApiExtra, mUsername, "testUpdateWithDiffs" );
   deleteRemoteProject( mApiExtra, mUsername, "testUpdateWithMissedVersion" );
+  deleteRemoteProject( mApiExtra, mUsername, "testMigrateProject" );
+  deleteRemoteProject( mApiExtra, mUsername, "testMigrateDetachProject" );
 }
 
 void TestMerginApi::cleanupTestCase()
@@ -1291,6 +1293,74 @@ void TestMerginApi::testUpdateWithMissedVersion()
   delete vl;
 }
 
+void TestMerginApi::testMigrateProject()
+{
+  // make local copy of project
+  QString projectName = "testMigrateProject";
+  QString projectDir = mApi->projectsPath() + "/" + projectName;
+  createLocalProject( projectDir );
+
+  // reload localmanager after copying the project
+  mApi->mLocalProjects.reloadProjectDir();
+  QStringList entryList = QDir( projectDir ).entryList( QDir::NoDotAndDotDot | QDir::Dirs );
+
+  // migrate project
+  QSignalSpy spy( mApi, &MerginApi::projectCreated );
+  QSignalSpy spy2( mApi, &MerginApi::syncProjectFinished );
+
+  mApi->migrateProjectToMergin( projectName );
+
+  QVERIFY( spy.wait( TestUtils::SHORT_REPLY ) );
+  QCOMPARE( spy.count(), 1 );
+  QCOMPARE( spy.takeFirst().at( 1 ).toBool(), true );
+  QCOMPARE( mApi->transactions().count(), 1 );
+  QVERIFY( spy2.wait( TestUtils::LONG_REPLY * 5 ) );
+
+
+  // remove local copy of project
+  deleteLocalProject( mApi, mUsername, projectName );
+  QVERIFY( !QFileInfo::exists( projectDir ) );
+
+  // download the project
+  downloadRemoteProject( mApi, mUsername, projectName );
+
+  // verify that all files have been uploaded
+  QStringList entryList2 = QDir( projectDir ).entryList( QDir::NoDotAndDotDot | QDir::Dirs );
+  QCOMPARE( entryList, entryList2 );
+}
+
+void TestMerginApi::testMigrateDetachProject()
+{
+  // make local copy of project
+  QString projectName = "testMigrateDetachProject";
+  QString projectDir = mApi->projectsPath() + "/" + projectName;
+  createLocalProject( projectDir );
+
+  // reload localmanager after copying the project
+  mApi->mLocalProjects.reloadProjectDir();
+
+  // migrate project
+  QSignalSpy spy( mApi, &MerginApi::projectCreated );
+  QSignalSpy spy2( mApi, &MerginApi::syncProjectFinished );
+
+  mApi->migrateProjectToMergin( projectName );
+
+  QVERIFY( spy.wait( TestUtils::SHORT_REPLY ) );
+  QCOMPARE( spy.count(), 1 );
+  QCOMPARE( spy.takeFirst().at( 1 ).toBool(), true );
+  QCOMPARE( mApi->transactions().count(), 1 );
+  QVERIFY( spy2.wait( TestUtils::LONG_REPLY * 5 ) );
+
+  // TEST if is mergin project
+  QVERIFY( QFileInfo::exists( projectDir + "/.mergin/" ) );
+
+  // detach project
+  QString projectNamespace = mUsername;
+  mApi->detachProjectFromMergin( projectNamespace, projectName );
+  // TEST if is NOT mergin project
+  QVERIFY( !QFileInfo::exists( projectDir + "/.mergin/" ) );
+}
+
 void TestMerginApi::testRegister()
 {
   QString password = mApi->userAuth()->password();
@@ -1372,4 +1442,12 @@ QByteArray TestMerginApi::readFileContent( const QString &filename )
   QByteArray data = f.readAll();
   f.close();
   return data;
+}
+
+void TestMerginApi::createLocalProject( const QString projectDir )
+{
+  QDir().mkdir( projectDir );
+  bool r0 = QFile::copy( mTestDataPath + "/diff_project/base.gpkg", projectDir + "/base.gpkg" );
+  bool r1 = QFile::copy( mTestDataPath + "/project.qgs", projectDir + "/project.qgs" );
+  QVERIFY( r0 && r1 );
 }

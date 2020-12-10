@@ -19,6 +19,12 @@
 LocalProjectsManager::LocalProjectsManager( const QString &dataDir )
   : mDataDir( dataDir )
 {
+  reloadProjectDir();
+}
+
+void LocalProjectsManager::reloadProjectDir()
+{
+  mProjects.clear();
   QStringList entryList = QDir( mDataDir ).entryList( QDir::NoDotAndDotDot | QDir::Dirs );
   for ( QString folderName : entryList )
   {
@@ -126,6 +132,22 @@ void LocalProjectsManager::removeProject( const QString &projectDir )
   }
 }
 
+void LocalProjectsManager::resetMerginInfo( const QString &projectNamespace, const QString &projectName )
+{
+  for ( int i = 0; i < mProjects.count(); ++i )
+  {
+    if ( mProjects[i].projectNamespace == projectNamespace && mProjects[i].projectName == projectName )
+    {
+      mProjects[i].localVersion = -1;
+      mProjects[i].serverVersion = -1;
+      mProjects[i].projectNamespace.clear();
+      updateProjectStatus( mProjects[i] );
+      emit projectMetadataChanged( mProjects[i].projectDir );
+      return;
+    }
+  }
+}
+
 void LocalProjectsManager::deleteProjectDirectory( const QString &projectDir )
 {
   for ( int i = 0; i < mProjects.count(); ++i )
@@ -176,6 +198,19 @@ void LocalProjectsManager::updateProjectErrors( const QString &projectDir, const
     {
       // Effects only local project list, no need to send projectMetadataChanged
       mProjects[i].qgisProjectError = errMsg;
+      return;
+    }
+  }
+}
+
+void LocalProjectsManager::updateMerginNamespace( const QString &projectDir, const QString &projectNamespace )
+{
+  for ( int i = 0; i < mProjects.count(); ++i )
+  {
+    if ( mProjects[i].projectDir == projectDir )
+    {
+      // Effects only local project list, no need to send projectMetadataChanged
+      mProjects[i].projectNamespace = projectNamespace;
       return;
     }
   }

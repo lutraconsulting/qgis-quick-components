@@ -294,6 +294,20 @@ class MerginApi: public QObject
     */
     Q_INVOKABLE void pingMergin();
 
+    /**
+    * Uploads and registers a local project to Mergin.
+    * \param projectName Project name that will be migrated
+    */
+    Q_INVOKABLE void migrateProjectToMergin( const QString &projectName );
+
+    /**
+    * Makes a mergin project to be local by removing .mergin folder. Updates project's info and related models accordingly.
+    * \param projectNamespace Project namespace that will be detached from Mergin
+    * \param projectName Project name that will be detached from Mergin
+    */
+    Q_INVOKABLE void detachProjectFromMergin( const QString &projectNamespace, const QString &projectName );
+
+
     LocalProjectInfo getLocalProject( const QString &projectFullName );
 
     static const int MERGIN_API_VERSION_MAJOR = 2020;
@@ -317,13 +331,14 @@ class MerginApi: public QObject
     */
     Q_INVOKABLE static QString getFullProjectName( QString projectNamespace, QString projectName );
 
-    // Test functions
     /**
     * Creates an empty project on Mergin server.
     * \param projectNamespace
     * \param projectName
     */
     void createProject( const QString &projectNamespace, const QString &projectName );
+
+    // Test functions
     /**
     * Deletes the project of given namespace and name on Mergin server.
     * \param projectNamespace
@@ -401,10 +416,10 @@ class MerginApi: public QObject
     void pullFilesStarted();
     //! Emitted when started to upload chunks (useful for unit testing)
     void pushFilesStarted();
-    void infoProjectFinished( const ProjectDiff &projectDiff, const QString &projectDir );
     //! Emitted when upload cancellation request has finished
     void uploadCanceled( const QString &projectFullName, bool result );
     void projectDataChanged( const QString &projectFullName );
+    void projectDetached();
 
   private slots:
     void listProjectsReplyFinished();

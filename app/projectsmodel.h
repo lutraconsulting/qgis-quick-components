@@ -70,10 +70,11 @@ class ProjectModel : public QAbstractListModel
 
   public slots:
     void syncedProjectFinished( const QString &projectDir, const QString &projectFullName, bool successfully );
+    void findProjectFiles();
 
   private:
     void reloadProjectFiles( QString projectFolder, QString projectName, bool successful );
-    void findProjectFiles();
+
 
     struct ProjectFile
     {

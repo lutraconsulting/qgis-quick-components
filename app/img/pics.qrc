@@ -51,5 +51,7 @@
         <file>mIconTableLayer.svg</file>
         <file>eye-slash.svg</file>
         <file>eye.svg</file>
+        <file>unlink.svg</file>
+        <file>cloud-upload.svg</file>
     </qresource>
 </RCC>

@@ -61,6 +61,8 @@ class TestMerginApi: public QObject
     void testDiffUpdateWithRebaseFailed();
     void testUpdateWithDiffs();
     void testUpdateWithMissedVersion();
+    void testMigrateProject();
+    void testMigrateDetachProject();
 
     void testRegister();
 
@@ -94,6 +96,9 @@ class TestMerginApi: public QObject
     void writeFileContent( const QString &filename, const QByteArray &data );
     //! Read content of the given filename
     QByteArray readFileContent( const QString &filename );
+
+    //! Creates local project in given project directory
+    void createLocalProject( const QString projectDir );
 };
 
 # endif // TESTMERGINAPI_H

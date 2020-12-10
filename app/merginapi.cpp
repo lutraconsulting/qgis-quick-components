@@ -718,8 +718,22 @@ void MerginApi::createProjectFinished()
   if ( r->error() == QNetworkReply::NoError )
   {
     InputUtils::log( "create " + projectFullName, QStringLiteral( "Success" ) );
-    emit notify( QStringLiteral( "Project created" ) );
     emit projectCreated( projectFullName, true );
+
+    QString projectNamespace, projectName;
+    extractProjectName( projectFullName, projectNamespace, projectName );
+
+    // TODO: Set namespace to related localProjectInfo if is empty
+    for ( const LocalProjectInfo &info : mLocalProjects.projects() )
+    {
+      if ( info.projectName == projectName && info.projectNamespace.isEmpty() )
+      {
+        mLocalProjects.updateMerginNamespace( info.projectDir, projectNamespace );
+      }
+    }
+
+    // TODO if dir is not empty?
+    uploadProject( projectNamespace, projectName );
   }
   else
   {
@@ -1099,6 +1113,31 @@ void MerginApi::pingMergin()
   QNetworkReply *reply = mManager.get( request );
   InputUtils::log( "ping", QStringLiteral( "Requesting: " ) + url.toString() );
   connect( reply, &QNetworkReply::finished, this, &MerginApi::pingMerginReplyFinished );
+}
+
+void MerginApi::migrateProjectToMergin( const QString &projectName )
+{
+  QString projectNamespace = mUserAuth->username();
+  InputUtils::log( "migrate project", projectName );
+  createProject( projectNamespace, projectName );
+}
+
+void MerginApi::detachProjectFromMergin( const QString &projectNamespace, const QString &projectName )
+{
+  // remove mergin folder
+  QString projectFullName = getFullProjectName( projectNamespace, projectName );
+  LocalProjectInfo projectInfo = mLocalProjects.projectFromMerginName( projectFullName );
+  if ( projectInfo.isValid() )
+  {
+    QDir merginProjectDir( projectInfo.projectDir + "/.mergin" );
+    merginProjectDir.removeRecursively();
+  }
+  // Update localProjects (updating mMerginProjects can be omitted since it is updated on listing projects)
+  mLocalProjects.resetMerginInfo( projectNamespace, projectName );
+  mLocalProjects.reloadProjectDir();
+
+  emit notify( QStringLiteral( "Project detached from Mergin" ) );
+  emit projectDetached();
 }
 
 QString MerginApi::apiRoot() const
@@ -1771,6 +1810,7 @@ void MerginApi::uploadInfoReplyFinished()
 
     LocalProjectInfo projectInfo = mLocalProjects.projectFromMerginName( projectFullName );
     transaction.projectDir = projectInfo.projectDir;
+
     Q_ASSERT( !transaction.projectDir.isEmpty() );
 
     MerginProjectMetadata serverProject = MerginProjectMetadata::fromJson( data );

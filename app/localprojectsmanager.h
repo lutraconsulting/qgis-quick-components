@@ -65,6 +65,8 @@ class LocalProjectsManager : public QObject
 
     QList<LocalProjectInfo> projects() const { return mProjects; }
 
+    void reloadProjectDir();
+
     LocalProjectInfo projectFromDirectory( const QString &projectDir ) const;
     LocalProjectInfo projectFromProjectFilePath( const QString &projectDir ) const;
 
@@ -82,6 +84,9 @@ class LocalProjectsManager : public QObject
     //! Should forget about that project (it has been removed already)
     void removeProject( const QString &projectDir );
 
+    //! Resets mergin related info for given project.
+    void resetMerginInfo( const QString &projectNamespace, const QString &projectName );
+
     //! Recursively removes project's directory (only when it exists in the list)
     void deleteProjectDirectory( const QString &projectDir );
 
@@ -97,6 +102,9 @@ class LocalProjectsManager : public QObject
 
     //! Updates qgisProjectError (after successful project synced)
     void updateProjectErrors( const QString &projectDir, const QString &errMsg );
+
+    //! Updates proejct's namespace
+    void updateMerginNamespace( const QString &projectDir, const QString &projectNamespace );
 
     //! Finds all QGIS project files and set the err variable if any occured.
     QString findQgisProjectFile( const QString &projectDir, QString &err );

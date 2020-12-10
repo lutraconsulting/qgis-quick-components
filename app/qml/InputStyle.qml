@@ -67,6 +67,8 @@ QtObject {
     property var editIcon: "qrc:/edit.svg"
     property var infoIcon: "qrc:/info.svg"
     property var tableIcon: "qrc:/table.svg"
+    property var uploadIcon: "qrc:/cloud-upload.svg"
+    property var detachIcon: "qrc:/unlink.svg"
 
     property var vectorPointIcon: "qrc:/mIconPointLayer.svg"
     property var vectorLineIcon: "qrc:/mIconLineLayer.svg"
