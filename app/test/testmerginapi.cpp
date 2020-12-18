@@ -1295,8 +1295,9 @@ void TestMerginApi::testUpdateWithMissedVersion()
 
 void TestMerginApi::testMigrateProject()
 {
-  // make local copy of project
   QString projectName = "testMigrateProject";
+  deleteLocalProject( mApi, mUsername, projectName );
+  // make local copy of project
   QString projectDir = mApi->projectsPath() + "/" + projectName;
   createLocalProject( projectDir );
 
@@ -1331,8 +1332,9 @@ void TestMerginApi::testMigrateProject()
 
 void TestMerginApi::testMigrateDetachProject()
 {
-  // make local copy of project
   QString projectName = "testMigrateDetachProject";
+  deleteLocalProject( mApi, mUsername, projectName );
+  // make local copy of project
   QString projectDir = mApi->projectsPath() + "/" + projectName;
   createLocalProject( projectDir );
 
