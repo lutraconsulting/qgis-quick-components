@@ -75,7 +75,6 @@ class ProjectModel : public QAbstractListModel
   private:
     void reloadProjectFiles( QString projectFolder, QString projectName, bool successful );
 
-
     struct ProjectFile
     {
       QString projectName;        //!< mergin project name (second part of "namespace/project"). empty for non-mergin project

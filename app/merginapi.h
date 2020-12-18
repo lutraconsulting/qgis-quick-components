@@ -297,8 +297,9 @@ class MerginApi: public QObject
     /**
     * Uploads and registers a local project to Mergin.
     * \param projectName Project name that will be migrated
+    * \param projectNamespace If empty, username of current user auth session is used.
     */
-    Q_INVOKABLE void migrateProjectToMergin( const QString &projectName );
+    Q_INVOKABLE void migrateProjectToMergin( const QString &projectName, const QString &projectNamespace = QString() );
 
     /**
     * Makes a mergin project to be local by removing .mergin folder. Updates project's info and related models accordingly.
