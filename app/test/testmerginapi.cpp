@@ -1451,5 +1451,13 @@ void TestMerginApi::createLocalProject( const QString projectDir )
   QDir().mkdir( projectDir );
   bool r0 = QFile::copy( mTestDataPath + "/diff_project/base.gpkg", projectDir + "/base.gpkg" );
   bool r1 = QFile::copy( mTestDataPath + "/project.qgs", projectDir + "/project.qgs" );
-  QVERIFY( r0 && r1 );
+
+  qDebug() << "Create local project " << projectDir << r0 << r1;
+  qDebug() << mTestDataPath + "/diff_project/base.gpkg" << QFile::exists( mTestDataPath + "/diff_project/base.gpkg" );
+  qDebug() << projectDir + "/base.gpkg" << QFile::exists( projectDir + "/base.gpkg" );
+  qDebug() << "----";
+  qDebug() << projectDir + "/project.qgs" << QFile::exists( projectDir + "/project.qgs" );
+  qDebug() << mTestDataPath + "/project.qgs" << QFile::exists( mTestDataPath + "/project.qgs" );
+
+  //QVERIFY( r0 && r1 );
 }
