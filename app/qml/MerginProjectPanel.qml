@@ -363,6 +363,12 @@ Item {
 
           delegate: delegateItem
 
+          onVisibleChanged: {
+            if ( visible ) {
+              __merginApi.listProjectsByName( __projectsModel.allDataForRole() )
+            }
+          }
+
           Text {
             id: noProjectsText
             anchors.fill: parent

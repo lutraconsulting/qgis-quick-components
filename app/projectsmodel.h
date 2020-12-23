@@ -56,6 +56,8 @@ class ProjectModel : public QAbstractListModel
     Q_INVOKABLE int rowAccordingPath( QString path ) const;
     Q_INVOKABLE void deleteProject( int row );
 
+    Q_INVOKABLE QVariantList allDataForRole();
+
     QHash<int, QByteArray> roleNames() const override;
 
     int rowCount( const QModelIndex &parent = QModelIndex() ) const override;

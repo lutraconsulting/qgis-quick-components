@@ -223,6 +223,12 @@ class MerginApi: public QObject
                                    const QString &flag = QStringLiteral(), const QString &filterTag = QStringLiteral(), const int page = 1 );
 
     /**
+     *
+     * \param projectnames
+     */
+    Q_INVOKABLE void listProjectsByName( const QStringList &projectNames = QStringList() );
+
+    /**
      * Sends non-blocking POST request to the server to download/update a project with a given name. On downloadProjectReplyFinished,
      * when a response is received, parses data-stream to files and rewrites local files with them. Extra files which don't match server
      * files are removed. Eventually emits syncProjectFinished on which MerginProjectModel updates status of the project item.
@@ -425,6 +431,7 @@ class MerginApi: public QObject
 
   private slots:
     void listProjectsReplyFinished();
+    void listProjectsByNameReplyFinished();
 
     // Pull slots
     void updateInfoReplyFinished();
@@ -446,6 +453,7 @@ class MerginApi: public QObject
     void pingMerginReplyFinished();
 
   private:
+    MerginProjectListEntry parseProjectMetadata( const QJsonObject &project);
     MerginProjectList parseListProjectsMetadata( const QByteArray &data );
     MerginProjectList parseProjectJsonArray( const QJsonArray &vArray );
     static QStringList generateChunkIdsForSize( qint64 fileSize );

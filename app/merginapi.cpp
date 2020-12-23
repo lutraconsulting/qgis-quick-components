@@ -105,6 +105,29 @@ void MerginApi::listProjects( const QString &searchExpression, const QString &fl
   connect( reply, &QNetworkReply::finished, this, &MerginApi::listProjectsReplyFinished );
 }
 
+void MerginApi::listProjectsByName( const QStringList &projectNames )
+{
+  // construct JSON body
+  QJsonDocument body;
+  QJsonObject projects;
+  QJsonArray projectsArr = QJsonArray::fromStringList( projectNames );
+
+  projects.insert( "projects", projectsArr );
+  body.setObject( projects );
+
+  QUrl url( mApiRoot + QStringLiteral( "/v1/project/by_names" ) );
+  qDebug() << "Request to: " << url;
+  qDebug() << "Body: " << body;
+
+  QNetworkRequest request = getDefaultRequest( true );
+  request.setUrl( url );
+  request.setRawHeader( "Content-type", "application/json" );
+
+  QNetworkReply *reply = mManager.post( request, body.toJson() );
+  connect( reply, &QNetworkReply::finished, this, &MerginApi::listProjectsByNameReplyFinished );
+}
+
+
 void MerginApi::downloadNextItem( const QString &projectFullName )
 {
   Q_ASSERT( mTransactionalStatus.contains( projectFullName ) );
@@ -1265,6 +1288,41 @@ void MerginApi::listProjectsReplyFinished()
   emit listProjectsFinished( mRemoteProjects, mTransactionalStatus, projectCount, requestedPage );
 }
 
+void MerginApi::listProjectsByNameReplyFinished()
+{
+  QNetworkReply *r = qobject_cast<QNetworkReply *>( sender() );
+  Q_ASSERT( r );
+
+  if ( r->error() == QNetworkReply::NoError )
+  {
+    QByteArray data = r->readAll();
+    MerginProjectList projectList = parseListProjectsMetadata( data );
+
+    // for any local projects we can update the latest server version
+    for ( MerginProjectListEntry project : qAsConst( projectList ) )
+    {
+      if ( !project.isValid() )
+        continue;
+
+      QString fullProjectName = getFullProjectName( project.projectNamespace, project.projectName );
+      LocalProjectInfo localProject = mLocalProjects.projectFromMerginName( fullProjectName );
+      if ( localProject.isValid() )
+      {
+        mLocalProjects.updateMerginServerVersion( localProject.projectDir, project.version );
+      }
+    }
+
+    InputUtils::log( "list projects by name", QStringLiteral( "Success - got %1 projects" ).arg( projectList.count() ) );
+  }
+  else
+  {
+    QString serverMsg = extractServerErrorMsg( r->readAll() );
+    QString message = QStringLiteral( "Network API error: %1(): %2. %3" ).arg( QStringLiteral( "listProjectsByName" ), r->errorString(), serverMsg );
+    emit networkErrorOccurred( serverMsg, QStringLiteral( "Mergin API error: listProjectsByName" ) );
+    InputUtils::log( "list projects by name", QStringLiteral( "FAILED - %1" ).arg( message ) );
+  }
+}
+
 
 void MerginApi::finalizeProjectUpdateCopy( const QString &projectFullName, const QString &projectDir, const QString &tempDir, const QString &filePath, const QList<DownloadQueueItem> &items )
 {
@@ -2240,6 +2298,47 @@ ProjectDiff MerginApi::compareProjectFiles( const QList<MerginFile> &oldServerFi
   return diff;
 }
 
+MerginProjectListEntry MerginApi::parseProjectMetadata( const QJsonObject &proj )
+{
+  MerginProjectListEntry project;
+
+  if ( proj.isEmpty() )
+  {
+    return project;
+  }
+  if ( proj.contains( QStringLiteral( "error" ) ) )
+  {
+    // to do
+    proj.value( QStringLiteral( "error" ) ).toInt( 0 ); // error code
+    return project;
+  }
+
+  project.projectName = proj.value( QStringLiteral( "name" ) ).toString();
+  project.projectNamespace = proj.value( QStringLiteral( "namespace" ) ).toString();
+
+  QString versionStr = proj.value( QStringLiteral( "version" ) ).toString();
+  if ( versionStr.isEmpty() )
+  {
+    project.version = 0;
+  }
+  else if ( versionStr.startsWith( "v" ) ) // cut off 'v' part from v123
+  {
+    versionStr = versionStr.mid( 1 );
+    project.version = versionStr.toInt();
+  }
+
+  QDateTime updated = QDateTime::fromString( proj.value( QStringLiteral( "updated" ) ).toString(), Qt::ISODateWithMs ).toUTC();
+  if ( !updated.isValid() )
+  {
+    project.serverUpdated = QDateTime::fromString( proj.value( QStringLiteral( "created" ) ).toString(), Qt::ISODateWithMs ).toUTC();
+  }
+  else
+  {
+    project.serverUpdated = updated;
+  }
+  return project;
+}
+
 
 MerginProjectList MerginApi::parseProjectJsonArray( const QJsonArray &vArray )
 {
@@ -2290,6 +2389,7 @@ MerginProjectList MerginApi::parseListProjectsMetadata( const QByteArray &data )
 
     result = parseProjectJsonArray( vArray );
   }
+
   return result;
 }
 

@@ -139,6 +139,18 @@ void ProjectModel::deleteProject( int row )
   endResetModel();
 }
 
+QVariantList ProjectModel::allDataForRole()
+{
+  QVariantList data;
+
+  for ( auto &proj : mProjectFiles )
+  {
+    data << MerginApi::getFullProjectName( proj.projectNamespace, proj.projectName );
+  }
+
+  return data;
+}
+
 int ProjectModel::rowCount( const QModelIndex &parent ) const
 {
   Q_UNUSED( parent );
