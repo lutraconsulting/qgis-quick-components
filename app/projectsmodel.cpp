@@ -82,6 +82,7 @@ QVariant ProjectModel::data( const QModelIndex &index, int role ) const
     case Path: return QVariant( projectFile.path );
     case ProjectInfo: return QVariant( projectFile.info );
     case IsValid: return QVariant( projectFile.isValid );
+    case IsMerginProject: return QVariant( !projectFile.projectName.isEmpty() && !projectFile.projectNamespace.isEmpty() );
     case PassesFilter: return mSearchExpression.isEmpty() || projectFile.folderName.contains( mSearchExpression, Qt::CaseInsensitive );
   }
 
@@ -97,6 +98,7 @@ QHash<int, QByteArray> ProjectModel::roleNames() const
   roleNames[Path] = "path";
   roleNames[ProjectInfo] = "projectInfo";
   roleNames[IsValid] = "isValid";
+  roleNames[IsMerginProject] = "isMerginProject";
   roleNames[PassesFilter] = "passesFilter";
   return roleNames;
 }

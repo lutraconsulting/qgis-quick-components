@@ -44,6 +44,7 @@ class ProjectModel : public QAbstractListModel
       ProjectInfo,
       Size,
       IsValid,
+      IsMerginProject,
       PassesFilter
     };
     Q_ENUMS( Roles )
