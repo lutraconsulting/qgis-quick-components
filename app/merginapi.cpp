@@ -1251,9 +1251,8 @@ void MerginApi::listProjectsReplyFinished()
     if ( doc.isObject() )
     {
       QJsonObject obj = doc.object();
-      QJsonArray rawProjects = obj.value( "projects" ).toArray();
       projectCount = obj.value( "count" ).toInt();
-      mRemoteProjects = parseProjectJsonArray( rawProjects );
+      mRemoteProjects = parseListProjectsMetadata( obj );
     }
     else
     {
@@ -1296,13 +1295,17 @@ void MerginApi::listProjectsByNameReplyFinished()
   if ( r->error() == QNetworkReply::NoError )
   {
     QByteArray data = r->readAll();
-    MerginProjectList projectList = parseListProjectsMetadata( data );
+    QJsonDocument doc = QJsonDocument::fromJson( data );
+    MerginProjectList projectList = parseListProjectsMetadata( doc.object() );
 
     // for any local projects we can update the latest server version
     for ( MerginProjectListEntry project : qAsConst( projectList ) )
     {
       if ( !project.isValid() )
+      {
+        // TODO: update info that this project can not be updated/uploaded!
         continue;
+      }
 
       QString fullProjectName = getFullProjectName( project.projectNamespace, project.projectName );
       LocalProjectInfo localProject = mLocalProjects.projectFromMerginName( fullProjectName );
@@ -2307,11 +2310,7 @@ MerginProjectListEntry MerginApi::parseProjectMetadata( const QJsonObject &proj 
     return project;
   }
   if ( proj.contains( QStringLiteral( "error" ) ) )
-  {
-    // to do
-    proj.value( QStringLiteral( "error" ) ).toInt( 0 ); // error code
     return project;
-  }
 
   project.projectName = proj.value( QStringLiteral( "name" ) ).toString();
   project.projectNamespace = proj.value( QStringLiteral( "namespace" ) ).toString();
@@ -2339,55 +2338,25 @@ MerginProjectListEntry MerginApi::parseProjectMetadata( const QJsonObject &proj 
   return project;
 }
 
-
-MerginProjectList MerginApi::parseProjectJsonArray( const QJsonArray &vArray )
+MerginProjectList MerginApi::parseListProjectsMetadata( const QJsonObject &object )
 {
-
   MerginProjectList result;
-  for ( auto it = vArray.constBegin(); it != vArray.constEnd(); ++it )
+
+  if ( object.contains( "projects" ) && object.value( "projects" ).isArray() ) // listProjects API
   {
-    QJsonObject projectMap = it->toObject();
-    MerginProjectListEntry project;
+    QJsonArray vArray = object.value( "projects" ).toArray();
 
-    project.projectName = projectMap.value( QStringLiteral( "name" ) ).toString();
-    project.projectNamespace = projectMap.value( QStringLiteral( "namespace" ) ).toString();
-
-    QString versionStr = projectMap.value( QStringLiteral( "version" ) ).toString();
-    if ( versionStr.isEmpty() )
+    for ( auto it = vArray.constBegin(); it != vArray.constEnd(); ++it )
     {
-      project.version = 0;
+      result << parseProjectMetadata( it->toObject() );
     }
-    else if ( versionStr.startsWith( "v" ) ) // cut off 'v' part from v123
-    {
-      versionStr = versionStr.mid( 1 );
-      project.version = versionStr.toInt();
-    }
-
-    QDateTime updated = QDateTime::fromString( projectMap.value( QStringLiteral( "updated" ) ).toString(), Qt::ISODateWithMs ).toUTC();
-    if ( !updated.isValid() )
-    {
-      project.serverUpdated = QDateTime::fromString( projectMap.value( QStringLiteral( "created" ) ).toString(), Qt::ISODateWithMs ).toUTC();
-    }
-    else
-    {
-      project.serverUpdated = updated;
-    }
-
-    result << project;
   }
-  return result;
-}
-
-MerginProjectList MerginApi::parseListProjectsMetadata( const QByteArray &data )
-{
-  MerginProjectList result;
-
-  QJsonDocument doc = QJsonDocument::fromJson( data );
-  if ( doc.isArray() )
+  else if ( !object.isEmpty() ) // listProjectsbyName API returns projects as separate objects not in array
   {
-    QJsonArray vArray = doc.array();
-
-    result = parseProjectJsonArray( vArray );
+    for ( auto it = object.begin(); it != object.end(); ++it )
+    {
+      result << parseProjectMetadata( it->toObject() );
+    }
   }
 
   return result;

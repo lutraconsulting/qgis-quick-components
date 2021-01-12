@@ -174,7 +174,6 @@ struct MerginProjectListEntry
   QString projectNamespace;
   int version = -1;
   QDateTime serverUpdated; // available latest version of project files on server
-
 };
 
 typedef QList<MerginProjectListEntry> MerginProjectList;
@@ -454,8 +453,7 @@ class MerginApi: public QObject
 
   private:
     MerginProjectListEntry parseProjectMetadata( const QJsonObject &project);
-    MerginProjectList parseListProjectsMetadata( const QByteArray &data );
-    MerginProjectList parseProjectJsonArray( const QJsonArray &vArray );
+    MerginProjectList parseListProjectsMetadata( const QJsonObject &object );
     static QStringList generateChunkIdsForSize( qint64 fileSize );
     QJsonArray prepareUploadChangesJSON( const QList<MerginFile> &files );
     static QString getApiKey( const QString &serverName );
