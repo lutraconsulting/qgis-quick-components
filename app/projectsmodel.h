@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
   qgsquicklayertreemodel.h
   --------------------------------------
   Date                 : Nov 2017
@@ -45,6 +45,9 @@ class ProjectModel : public QAbstractListModel
       Size,
       IsValid,
       IsMerginProject,
+      Status,    // project status to show corresponding icon (Modified, UpToDate,..)
+      IsPending, // tells whether project is in progress of upload/download
+      Progress,  // if process is pending (download/upload)
       PassesFilter
     };
     Q_ENUMS( Roles )
@@ -75,6 +78,12 @@ class ProjectModel : public QAbstractListModel
     void syncedProjectFinished( const QString &projectDir, const QString &projectFullName, bool successfully );
     void findProjectFiles();
 
+    void onListProjectsByNameFinished();
+    void syncProjectStatusChanged( const QString &projectFullName, qreal progress );
+
+  signals:
+    void projectStatusUpdateFinished();
+
   private:
     void reloadProjectFiles( QString projectFolder, QString projectName, bool successful );
 
@@ -86,6 +95,8 @@ class ProjectModel : public QAbstractListModel
       QString path;               //!< path to the .qgs/.qgz project file
       QString info;
       bool isValid;
+
+      qreal progress; //!< Progress of upload/download, <0 if not in process
 
       /**
        * Ordering of local projects: first non-mergin projects (using folder name),
@@ -118,6 +129,7 @@ class ProjectModel : public QAbstractListModel
           return false;
       }
     };
+
     LocalProjectsManager &mLocalProjects;
     QList<ProjectFile> mProjectFiles;
     QString mSearchExpression;

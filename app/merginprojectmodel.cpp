@@ -8,6 +8,7 @@
  ***************************************************************************/
 
 #include "merginprojectmodel.h"
+#include "inpututils.h"
 
 #include <QString>
 
@@ -49,23 +50,7 @@ QVariant MerginProjectModel::data( const QModelIndex &index, int role ) const
       }
     }
 
-    case Status:
-    {
-      switch ( project->status )
-      {
-        case ProjectStatus::OutOfDate:
-          return QVariant( QStringLiteral( "outOfDate" ) );
-        case ProjectStatus::UpToDate:
-          return QVariant( QStringLiteral( "upToDate" ) );
-        case ProjectStatus::NoVersion:
-          return QVariant( QStringLiteral( "noVersion" ) );
-        case ProjectStatus::Modified:
-          return QVariant( QStringLiteral( "modified" ) );
-        case ProjectStatus::NonProjectItem:
-          return QVariant( QStringLiteral( "nonProjectItem" ) );
-      }
-      break;
-    }
+    case Status: return QVariant( InputUtils::statusToString( project->status ) );
     case Pending: return QVariant( project->pending );
     case PassesFilter: return mSearchExpression.isEmpty() || project->projectName.contains( mSearchExpression, Qt::CaseInsensitive )
                                 || project->projectNamespace.contains( mSearchExpression, Qt::CaseInsensitive );
@@ -110,7 +95,6 @@ void MerginProjectModel::updateModel( const MerginProjectList &merginProjects, Q
     mMerginProjects.clear();
   }
   setLastPage( page );
-
 
   for ( MerginProjectListEntry entry : merginProjects )
   {

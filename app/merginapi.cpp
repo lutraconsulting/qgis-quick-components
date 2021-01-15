@@ -30,7 +30,7 @@
 #include <geodiff.h>
 
 const QString MerginApi::sMetadataFile = QStringLiteral( "/.mergin/mergin.json" );
-const QString MerginApi::sDefaultApiRoot = QStringLiteral( "https://public.cloudmergin.com/" );
+const QString MerginApi::sDefaultApiRoot = QStringLiteral( "https://dev.dev.cloudmergin.com/" );
 const QSet<QString> MerginApi::sIgnoreExtensions = QSet<QString>() << "gpkg-shm" << "gpkg-wal" << "qgs~" << "qgz~" << "pyc" << "swap";
 const QSet<QString> MerginApi::sIgnoreFiles = QSet<QString>() << "mergin.json" << ".DS_Store";
 const int MerginApi::UPLOAD_CHUNK_SIZE = 10 * 1024 * 1024; // Should be the same as on Mergin server
@@ -107,6 +107,8 @@ void MerginApi::listProjects( const QString &searchExpression, const QString &fl
 
 void MerginApi::listProjectsByName( const QStringList &projectNames )
 {
+  setApiRoot(defaultApiRoot());
+
   // construct JSON body
   QJsonDocument body;
   QJsonObject projects;
@@ -116,13 +118,14 @@ void MerginApi::listProjectsByName( const QStringList &projectNames )
   body.setObject( projects );
 
   QUrl url( mApiRoot + QStringLiteral( "/v1/project/by_names" ) );
-  qDebug() << "Request to: " << url;
-  qDebug() << "Body: " << body;
+//  qDebug() << "Request to: " << url;
+//  qDebug() << "Body: " << body;
 
   QNetworkRequest request = getDefaultRequest( true );
   request.setUrl( url );
   request.setRawHeader( "Content-type", "application/json" );
 
+  emit listProjectsByNameRequested();
   QNetworkReply *reply = mManager.post( request, body.toJson() );
   connect( reply, &QNetworkReply::finished, this, &MerginApi::listProjectsByNameReplyFinished );
 }
@@ -1324,6 +1327,9 @@ void MerginApi::listProjectsByNameReplyFinished()
     emit networkErrorOccurred( serverMsg, QStringLiteral( "Mergin API error: listProjectsByName" ) );
     InputUtils::log( "list projects by name", QStringLiteral( "FAILED - %1" ).arg( message ) );
   }
+
+  emit listProjectsByNameFinished();
+  r->deleteLater();
 }
 
 

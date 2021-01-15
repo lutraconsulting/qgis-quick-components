@@ -371,6 +371,23 @@ QString InputUtils::localizedDateFromUTFString( QString timestamp )
   }
 }
 
+QString InputUtils::statusToString( ProjectStatus status )
+{
+  switch ( status )
+  {
+    case ProjectStatus::OutOfDate:
+      return QStringLiteral( "outOfDate" );
+    case ProjectStatus::UpToDate:
+      return QStringLiteral( "upToDate" );
+    case ProjectStatus::NoVersion:
+      return QStringLiteral( "noVersion" );
+    case ProjectStatus::Modified:
+      return QStringLiteral( "modified" );
+    case ProjectStatus::NonProjectItem:
+      return QStringLiteral( "nonProjectItem" );
+  }
+}
+
 QString InputUtils::appVersion()
 {
   QString version;

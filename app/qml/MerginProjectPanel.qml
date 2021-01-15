@@ -33,6 +33,33 @@ Item {
     stackView.visible = true
   }
 
+  function handleSyncClick(status, projectFullName, projectNamespace, projectName, pendingProject) {
+    if (status === "upToDate") return
+
+    if (pendingProject) {
+      if (status === "modified") {
+        __merginApi.uploadCancel(projectFullName)
+      }
+      if (status === "noVersion" || status === "outOfDate") {
+        __merginApi.updateCancel(projectFullName)
+      }
+      return
+    }
+
+    if ( !__inputUtils.hasStoragePermission() ) {
+      if ( __inputUtils.acquireStoragePermission() )
+        restartAppDialog.open()
+      return
+    }
+
+    if (status === "noVersion" || status === "outOfDate") {
+      var withoutAuth = !__merginApi.userAuth.hasAuthData() && toolbar.highlighted === exploreBtn.text
+      __merginApi.updateProject(projectNamespace, projectName, withoutAuth)
+    } else if (status === "modified") {
+      __merginApi.uploadProject(projectNamespace, projectName)
+    }
+  }
+
   id: projectsPanel
   visible: false
   focus: true
@@ -363,12 +390,6 @@ Item {
 
           delegate: delegateItem
 
-          onVisibleChanged: {
-            if ( visible ) {
-              __merginApi.listProjectsByName( __projectsModel.allDataForRole() )
-            }
-          }
-
           Text {
             id: noProjectsText
             anchors.fill: parent
@@ -460,6 +481,8 @@ Item {
           width: cellWidth
           height: passesFilter ? cellHeight : 0
           visible: height ? true : false
+          pending: model.isPending
+          progressValue: model.progress
           statusIconSource:"more_menu.svg"
           itemMargin: projectsPanel.panelMargin
           projectFullName: (projectNamespace && projectName) ? (projectNamespace + "/" + projectName) : folderName
@@ -467,6 +490,14 @@ Item {
           highlight: {
             if (disabled) return true
             return path === projectsPanel.activeProjectPath ? true : false
+          }
+
+          onProgressValueChanged: console.log("VAL: " + progressValue)
+          onPendingChanged: console.log("pending? " + pending)
+
+          onUpdateFinished: {
+            additionalIconSource = getStatusIcon( model.status, model.isPending)
+            endBusyIndicator()
           }
 
           Menu {
@@ -544,7 +575,25 @@ Item {
             projectsPanel.visible = false
           }
 
-          onMenuClicked:contextMenu.open()
+          onMenuClicked: contextMenu.open()
+
+          onAdditionalIconClicked: handleSyncClick(status, projectFullName, projectNamespace, projectName, isPending)
+
+          Connections {
+            target: __merginApi
+
+            onListProjectsByNameRequested: {
+              delegateItemContent.runBusyIndicator()
+            }
+          }
+
+          Connections {
+            target: __projectsModel
+
+            onProjectStatusUpdateFinished: {
+              delegateItemContent.updateFinished()
+            }
+          }
         }
       }
 
@@ -564,32 +613,7 @@ Item {
           progressValue: syncProgress
           isAdditional: status === "nonProjectItem"
 
-          onMenuClicked: {
-            if (status === "upToDate") return
-
-            if (pendingProject) {
-              if (status === "modified") {
-                __merginApi.uploadCancel(projectFullName)
-              }
-              if (status === "noVersion" || status === "outOfDate") {
-                __merginApi.updateCancel(projectFullName)
-              }
-              return
-            }
-
-            if ( !__inputUtils.hasStoragePermission() ) {
-              if ( __inputUtils.acquireStoragePermission() )
-                restartAppDialog.open()
-              return
-            }
-
-            if (status === "noVersion" || status === "outOfDate") {
-              var withoutAuth = !__merginApi.userAuth.hasAuthData() && toolbar.highlighted === exploreBtn.text
-              __merginApi.updateProject(projectNamespace, projectName, withoutAuth)
-            } else if (status === "modified") {
-              __merginApi.uploadProject(projectNamespace, projectName)
-            }
-          }
+          onMenuClicked: handleSyncClick(status, projectFullName, projectNamespace, projectName, pendingProject)
 
           onDelegateButtonClicked: {
             var flag = ""
@@ -656,6 +680,7 @@ Item {
               onActivated: {
                 toolbar.highlighted = homeBtn.text;
                 showMergin = false
+                __merginApi.listProjectsByName( __projectsModel.allDataForRole() )
               }
             }
           }

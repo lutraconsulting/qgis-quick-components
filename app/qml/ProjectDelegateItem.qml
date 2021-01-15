@@ -16,6 +16,17 @@ import QgsQuick 0.1 as QgsQuick
 import "."  // import InputStyle singleton
 import "./components"
 
+/*
+  |----------------------------------------------------------------------|
+  |   ProjectName                               |    1st     |    2nd    |
+  |                                             |   action   |   action  |
+  |   ProjectDescription                        |            |           |
+  |----------------------------------------------------------------------|
+
+  1st action = status action
+  2nd action = menu action
+ */
+
 Rectangle {
     id: itemContainer
     color: itemContainer.highlight ? InputStyle.fontColorBright : itemContainer.primaryColor
@@ -34,11 +45,67 @@ Rectangle {
     property real itemMargin: InputStyle.panelMargin
     property real progressValue: 0
     property bool isAdditional: false
+    property string additionalIconSource: ""
 
-
-    signal itemClicked();
+    signal itemClicked()
     signal menuClicked()
     signal delegateButtonClicked()
+    signal additionalIconClicked()
+    signal updateFinished()
+
+
+//    property Input.Project project: Input.InvalidProject
+
+    // temp properties until we get Project instance
+    property string projectName_future
+    property string projectDescription_future
+    property bool hasMenu_future
+
+    signal projectClicked_future()
+    signal statusClicked_future()
+    signal menuClicked_future()
+
+    states: [
+      State {
+        name: "idle"
+        PropertyChanges {
+          target: object
+
+        }
+      },
+      State {
+        name: "pending"
+        PropertyChanges {
+          target: object
+
+        }
+      },
+      State {
+        name: "invalid"
+        PropertyChanges {
+          target: object
+
+        }
+      },
+      State {
+        name: "fetching"
+        PropertyChanges {
+          target: object
+
+        }
+      }
+    ]
+
+
+    property var endBusyIndicator: function endBusyIndicator() {
+      loadingProjectStatusIndicator.running = false
+      iconTEMPcontainer.visible = true
+    }
+
+    property var runBusyIndicator: function runBusyIndicator() {
+      loadingProjectStatusIndicator.running = true
+      iconTEMPcontainer.visible = false
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -124,7 +191,56 @@ Rectangle {
                     }
                   }
                 }
+            }
 
+            Item {
+              id: additionalIconContainer
+              height: itemContainer.cellHeight
+              width: height
+              visible: model.isMerginProject ? model.isMerginProject : false
+
+              MouseArea {
+                anchors.fill: parent
+                onClicked: additionalIconClicked()
+              }
+
+              Item {
+                id: busyTEMPcontainer
+                visible: true
+                anchors.fill: parent
+
+                BusyIndicator {
+                  id: loadingProjectStatusIndicator
+                  anchors.horizontalCenter: parent.horizontalCenter
+                  anchors.verticalCenter: parent.verticalCenter
+                  running: false
+                  implicitHeight: 80 * QgsQuick.Utils.dp // 80 just to be visible on PC, 40 is fine for mobile
+                  implicitWidth: implicitHeight
+                }
+              }
+
+              Item {
+                id: iconTEMPcontainer
+                anchors.fill: parent
+                visible: false
+
+                Image {
+                  id: additionalIcon
+                  anchors.centerIn: parent
+                  source: additionalIconSource
+                  height: itemContainer.iconSize
+                  width: height
+                  sourceSize.width: width
+                  sourceSize.height: height
+                  fillMode: Image.PreserveAspectFit
+                }
+
+                ColorOverlay {
+                  anchors.fill: additionalIcon
+                  source: additionalIcon
+                  color: itemContainer.highlight ? itemContainer.primaryColor : itemContainer.secondaryColor
+                }
+              }
             }
 
             Item {

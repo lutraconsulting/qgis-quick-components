@@ -325,6 +325,7 @@ void LocalProjectsManager::updateProjectStatus( LocalProjectInfo &project )
   ProjectStatus newStatus = currentProjectStatus( project );
   if ( newStatus != project.status )
   {
+    qDebug() << "updating status for project " << project.projectName << " from state " << InputUtils::statusToString(project.status) << "to state " << InputUtils::statusToString(newStatus);
     project.status = newStatus;
     emit projectMetadataChanged( project.projectDir );
   }

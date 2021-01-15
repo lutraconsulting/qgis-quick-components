@@ -399,6 +399,8 @@ class MerginApi: public QObject
 
     void listProjectsFinished( const MerginProjectList &merginProjects, Transactions pendingProjects, int projectCount, int page );
     void listProjectsFailed();
+    void listProjectsByNameFinished();
+    void listProjectsByNameRequested();
     void syncProjectFinished( const QString &projectDir, const QString &projectFullName, bool successfully = true );
     /**
      * Emitted when sync starts/finishes or the progress changes - useful to give a clue in the GUI about the status.

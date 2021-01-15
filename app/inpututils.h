@@ -130,6 +130,8 @@ class InputUtils: public QObject
 
     static QString localizedDateFromUTFString( QString timestamp );
 
+    static QString statusToString( ProjectStatus status );
+
     /** InputApp version */
     static QString appVersion();
 

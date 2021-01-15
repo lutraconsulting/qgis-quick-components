@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
   qgsquicklayertreemodel.cpp
   --------------------------------------
   Date                 : Nov 2017
@@ -49,6 +49,7 @@ void ProjectModel::findProjectFiles()
     projectFile.projectName = project.projectName;
     projectFile.projectNamespace = project.projectNamespace;
     projectFile.isValid = project.isShowable();
+    projectFile.progress = -1;
     QDateTime created = fi.created().toLocalTime();
     if ( projectFile.isValid )
     {
@@ -65,6 +66,26 @@ void ProjectModel::findProjectFiles()
   endResetModel();
 }
 
+void ProjectModel::onListProjectsByNameFinished()
+{
+  emit projectStatusUpdateFinished();
+}
+
+void ProjectModel::syncProjectStatusChanged( const QString &projectFullName, qreal progress )
+{
+  int row = 0;
+  for ( ProjectFile proj : qAsConst( mProjectFiles ) )
+  {
+    if ( projectFullName == MerginApi::getFullProjectName( proj.projectNamespace, proj.projectName ) )
+    {
+      proj.progress = progress;
+      QModelIndex ix = index( row );
+      emit dataChanged( ix, ix );
+      break;
+    }
+    row++;
+  }
+}
 
 QVariant ProjectModel::data( const QModelIndex &index, int role ) const
 {
@@ -73,6 +94,10 @@ QVariant ProjectModel::data( const QModelIndex &index, int role ) const
     return QVariant( "" );
 
   const ProjectFile &projectFile = mProjectFiles.at( row );
+  LocalProjectInfo projectInfo = mLocalProjects.projectFromMerginName
+      ( MerginApi::getFullProjectName(projectFile.projectNamespace, projectFile.projectName ) );
+
+  qDebug() << "Data index: " << index << " and role: " << static_cast<Roles>( role );
 
   switch ( role )
   {
@@ -83,6 +108,9 @@ QVariant ProjectModel::data( const QModelIndex &index, int role ) const
     case ProjectInfo: return QVariant( projectFile.info );
     case IsValid: return QVariant( projectFile.isValid );
     case IsMerginProject: return QVariant( !projectFile.projectName.isEmpty() && !projectFile.projectNamespace.isEmpty() );
+    case IsPending: return QVariant( projectFile.progress > 0 );
+    case Progress: return QVariant( projectFile.progress );
+    case Status: return QVariant( InputUtils::statusToString( mLocalProjects.currentProjectStatus( projectInfo ) ) );
     case PassesFilter: return mSearchExpression.isEmpty() || projectFile.folderName.contains( mSearchExpression, Qt::CaseInsensitive );
   }
 
@@ -99,6 +127,9 @@ QHash<int, QByteArray> ProjectModel::roleNames() const
   roleNames[ProjectInfo] = "projectInfo";
   roleNames[IsValid] = "isValid";
   roleNames[IsMerginProject] = "isMerginProject";
+  roleNames[Status] = "status";
+  roleNames[IsPending] = "isPending";
+  roleNames[Progress] = "progress";
   roleNames[PassesFilter] = "passesFilter";
   return roleNames;
 }
@@ -187,7 +218,6 @@ bool ProjectModel::containsProject( const QString &projectNamespace, const QStri
 
 void ProjectModel::syncedProjectFinished( const QString &projectDir, const QString &projectFullName, bool successfully )
 {
-
   // Do basic validity check
   if ( successfully )
   {
@@ -196,6 +226,7 @@ void ProjectModel::syncedProjectFinished( const QString &projectDir, const QStri
     mLocalProjects.updateProjectErrors( projectDir, errMsg );
   }
 
+  // TODO: set not pending project
   reloadProjectFiles( projectDir, projectFullName, successfully );
 }
 
