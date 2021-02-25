@@ -33,6 +33,8 @@ import android.provider.MediaStore;
 import android.graphics.Bitmap;
 import android.support.v4.content.FileProvider;
 
+import androidx.exifinterface.media.ExifInterface;
+
 public class CameraActivity extends Activity{
     private static final String TAG = "Camera Activity";
     private static final int CAMERA_CODE = 102;
@@ -46,7 +48,7 @@ public class CameraActivity extends Activity{
 
         targetPath = getIntent().getExtras().getString("targetPath");
         Log.d(TAG, "targetPath: "+ targetPath);
-        
+
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
 
@@ -61,7 +63,7 @@ public class CameraActivity extends Activity{
                 Uri photoURI = FileProvider.getUriForFile(this,
                                                           "uk.co.lutraconsulting.fileprovider",
                                                           photoFile);
-                
+
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 takePictureIntent.putExtra("__RESULT__", "takePictureIntent__RESULT__");
                 startActivityForResult(takePictureIntent, CAMERA_CODE);
@@ -83,7 +85,7 @@ public class CameraActivity extends Activity{
         String currentPhotoPath;
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        
+
         cameraFile = File.createTempFile(imageFileName,  /* prefix */
                                          ".jpg",         /* suffix */
                                          getCacheDir()      /* directory */
@@ -94,7 +96,14 @@ public class CameraActivity extends Activity{
         Log.d(TAG, "currentPhotoPath: "+currentPhotoPath);
         return cameraFile;
     }
-    
+
+    public static String getExitInfo(String targetPath) {
+        // Create an image file name
+        String info = "trlala";
+
+        return info;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "onActivityResult()");
@@ -104,25 +113,29 @@ public class CameraActivity extends Activity{
 
             Log.d(TAG, "tmp exists: "+cameraFile.exists());
             Log.d(TAG, "tmp path: "+cameraFile.getAbsolutePath());
+            Log.d(TAG, "EXIF test: "+ targetPath);
+
+
             try{
+                readExif(cameraFile.getAbsolutePath());
                 copyFile(cameraFile, new File(targetPath, cameraFile.getName()));
                 if (data == null) {
-                    data = getIntent();                
+                    data = getIntent();
                 }
                 data.putExtra("__RESULT__", cameraFile.getAbsolutePath());
-                setResult(Activity.RESULT_OK, data);   
-                
+                setResult(Activity.RESULT_OK, data);
+
             }catch(IOException e){
                 Intent intent = this.getIntent();
                 if (data == null) {
-                    data = getIntent();                
+                    data = getIntent();
                 }
                 data.putExtra("__RESULT__", e.getMessage());
-                setResult(Activity.RESULT_CANCELED, data);   
+                setResult(Activity.RESULT_CANCELED, data);
             }
-            
+
             // TODO: after copy, verify if is correctly copied and then remove the old one
-            
+
         }
         finish();
     }
@@ -150,8 +163,55 @@ public class CameraActivity extends Activity{
           if (out != null)
             out.close();
         }
-        
-    }    
+
+    }
+
+
+  private void readExif(String src) throws IOException {
+      Log.d(TAG, "readExif: "+src+" to file: ");
+      Uri uri; // the URI you've received from the other app
+      InputStream in = null;
+      try {
+          //in = getContentResolver().openInputStream(uri);
+          in = new FileInputStream(src);
+          ExifInterface exifInterface = new ExifInterface(in);
+          String date = exifInterface.getAttribute("GPSDateStamp");
+          String lat = exifInterface.getAttribute("GPSDestLatitude");
+          String lon = exifInterface.getAttribute("GPSDestLongitude");
+          String lat2 = exifInterface.getAttribute("GPSLatitude");
+          String lon2 = exifInterface.getAttribute("GPSLongitude");
+          String dir = exifInterface.getAttribute("GPSImgDirection");
+          String dir2 = exifInterface.getAttribute("M");
+          String dir3 = exifInterface.getAttribute("T");
+          String dir4 = exifInterface.getAttribute("GPSTrack");
+          String dir5 = exifInterface.getAttribute("GPSDestBearing");
+          String dir6 = exifInterface.getAttribute("GPSBearing");
+          String gpsInfo = exifInterface.getAttribute("GPSSatellites");
+
+          Log.d(TAG, "readExif LAT: " + lat2);
+          Log.d(TAG, "readExif LON: " + lon2);
+          Log.d(TAG, "readExif DIR: " + dir + "," + dir2 + "," + dir3  + "," + dir4 + "," + dir5 + "," + dir6);
+          Log.d(TAG, "readExif INFO: " + gpsInfo );
+
+
+          Log.d(TAG, "readExif REF: " + exifInterface.getAttribute("GPSImgDirectionRef") );
+          Log.d(TAG, "readExif REF: " + exifInterface.getAttribute("GPSTrackRef") );
+          Log.d(TAG, "readExif REF: " + exifInterface.getAttribute("GPSDestBearingRef") );
+
+           Log.d(TAG, "readExif: "+src+" to file: ");
+          // Now you can extract any Exif tag you want
+          // Assuming the image is a JPEG or supported raw format
+      } catch (IOException e) {
+          // Handle any errors
+      } finally {
+          if (in != null) {
+              try {
+                  in.close();
+              } catch (IOException ignored) {}
+          }
+      }
+
+  }
 
 }
 
