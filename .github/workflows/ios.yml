@@ -11,7 +11,7 @@ env:
   IOS_MIN_SDK_VERSION: ${{ '12.0' }}
 jobs:
   ios_build:
-    if: github.repository == 'lutraconsulting/input'
+    if: ( github.repository == 'lutraconsulting/input' ) && (!contains(github.event.head_commit.message, 'Translate '))
     runs-on: macos-latest
     steps:
       - name: Select latest Xcode

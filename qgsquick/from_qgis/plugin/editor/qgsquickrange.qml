@@ -21,7 +21,6 @@ import QgsQuick 0.1 as QgsQuick
 Item {
   signal valueChanged(var value, bool isNull)
 
-  property real customMargin: 10 * QgsQuick.Utils.dp
   property string widgetStyle: config["Style"] ? config["Style"] : "SpinBox"
   property int precision: config["Precision"]
   property real from: config["Min"]
@@ -37,7 +36,6 @@ Item {
   anchors {
     left: parent.left
     right: parent.right
-    rightMargin: fieldItem.customMargin
   }
 
   // background
@@ -113,7 +111,7 @@ Item {
       contentItem: TextInput {
         z: 2
         text: spinbox.textFromValue(spinbox.value, spinbox.locale)
-        font.pixelSize: customStyle.fields.fontPixelSize
+        font.pointSize: customStyle.fields.fontPointSize
         color: customStyle.fields.fontColor
         selectionColor: customStyle.fields.fontColor
         selectedTextColor: "#ffffff"
@@ -143,9 +141,10 @@ Item {
       text: Number(slider.value).toFixed(precision).toLocaleString(fieldItem.locale) + fieldItem.suffix
       verticalAlignment: Text.AlignVCenter
       horizontalAlignment: Text.AlignLeft
-      font.pixelSize: customStyle.fields.fontPixelSize
+      font.pointSize: customStyle.fields.fontPointSize
       color: customStyle.fields.fontColor
-      padding: fieldItem.customMargin
+      padding: 10 * QgsQuick.Utils.dp
+      leftPadding: customStyle.fields.sideMargin
     }
 
     Slider {
@@ -158,6 +157,7 @@ Item {
       from: fieldItem.from
       to: fieldItem.to
       stepSize: fieldItem.step
+      rightPadding: customStyle.fields.sideMargin
 
       onValueChanged: {
         if (visible) {

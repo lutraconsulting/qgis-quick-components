@@ -15,44 +15,60 @@
 
 import QtQuick 2.5
 import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.3
 import QgsQuick 0.1 as QgsQuick
 
 Item {
   property real iconSize
   property color fontColor
-  property real fontPixelSize: root.iconSize * 0.75
+  property real fontPointSize: root.iconSize * 0.75
   property string iconSource
   property string labelText
 
   id: root
-  width: root.iconSize + text.width
-  height: root.iconSize
+  width: text.paintedWidth
+  height: root.iconSize + text.paintedHeight
 
-  Image {
-    id: icon
-    source: root.iconSource
-    width: root.iconSize
-    height: root.iconSize
-    sourceSize.width: width
-    sourceSize.height: height
-    fillMode: Image.PreserveAspectFit
-  }
+  ColumnLayout {
+    anchors.fill: parent
+    spacing: 20 * QgsQuick.Utils.dp
 
-  ColorOverlay {
-    anchors.fill: icon
-    source: icon
-    color: root.fontColor
-  }
+    Item {
+      id: iconContainer
+      implicitHeight: 15 * QgsQuick.Utils.dp
+      Layout.alignment: Qt.AlignHCenter
 
-  Text {
-    id: text
-    height: root.iconSize
-    text: root.labelText
-    font.pixelSize: root.fontPixelSize
-    color: root.fontColor
-    anchors.leftMargin: root.iconSize + fieldItem.textMargin
-    x: root.iconSize + fieldItem.textMargin
-    horizontalAlignment: Text.AlignRight
-    verticalAlignment: Text.AlignVCenter
+      Image {
+        id: icon
+        x: -width/2
+        source: root.iconSource
+        width: root.iconSize
+        height: root.iconSize
+        sourceSize.width: width
+        sourceSize.height: height
+        fillMode: Image.PreserveAspectFit
+      }
+
+      ColorOverlay {
+        anchors.fill: icon
+        source: icon
+        color: root.fontColor
+      }
+    }
+
+    Item {
+      id: textContainer
+      implicitHeight: 15 * QgsQuick.Utils.dp
+
+
+      Text {
+        id: text
+        height: root.iconSize
+        text: root.labelText
+        font.pointSize: root.fontPointSize
+        color: root.fontColor
+        Layout.alignment: Qt.AlignHCenter
+      }
+    }
   }
 }

@@ -5,6 +5,7 @@ env:
 
 jobs:
   android_build:
+    if: ( github.repository == 'lutraconsulting/input' ) && (!contains(github.event.head_commit.message, 'Translate '))
     runs-on: ubuntu-latest
     strategy:
       matrix:

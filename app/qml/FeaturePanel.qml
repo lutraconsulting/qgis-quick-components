@@ -174,6 +174,7 @@ Drawer {
             style: QgsQuick.FeatureFormStyling {
                 property color backgroundColor: "white"
                 property real backgroundOpacity: 1
+                property real titleLabelPointSize: 16
 
                 property QtObject group: QtObject {
                   property color backgroundColor: InputStyle.panelBackgroundLight
@@ -184,7 +185,7 @@ Drawer {
                   property real bottomMargin: 1 * QgsQuick.Utils.dp
                   property real height: 64 * QgsQuick.Utils.dp
                   property color fontColor: InputStyle.fontColor
-                  property int spacing: 10 * QgsQuick.Utils.dp
+                  property int spacing: 0
                   property int fontPixelSize: 24 * QgsQuick.Utils.dp
                 }
 
@@ -199,10 +200,11 @@ Drawer {
                   property real height: 48 * QgsQuick.Utils.dp
                   property real buttonHeight: height * 0.8
                   property real spacing: 5 * QgsQuick.Utils.dp
+                  property int tabLabelPointSize: 12
                 }
 
                 property QtObject constraint: QtObject {
-                  property color validColor: "black"
+                  property color validColor: InputStyle.labelColor
                   property color invalidColor: "#c0392b"
                   property color descriptionColor: "#e67e22"
                 }
@@ -210,7 +212,7 @@ Drawer {
                 property QtObject toolbutton: QtObject {
                   property color backgroundColor: "transparent"
                   property color backgroundColorInvalid: "#bdc3c7"
-                  property color activeButtonColor: InputStyle.panelBackgroundDarker
+                  property color activeButtonColor: InputStyle.activeButtonColor
                   property real size: 80 * QgsQuick.Utils.dp
                 }
 
@@ -224,6 +226,10 @@ Drawer {
                     property real cornerRadius: 8 * QgsQuick.Utils.dp
                     property real height: 54 * QgsQuick.Utils.dp
                     property int fontPixelSize: 22 * QgsQuick.Utils.dp
+                    property real sideMargin: 10 * QgsQuick.Utils.dp
+                    property real outerMargin: 20 * QgsQuick.Utils.dp
+                    property int fontPointSize: 15
+                    property int labelPointSize: 12
                   }
 
                 property QtObject icons: QtObject {
@@ -234,6 +240,8 @@ Drawer {
                   property var notAvailable: QgsQuick.Utils.getThemeIcon("ic_photo_notavailable_white")
                   property var today: QgsQuick.Utils.getThemeIcon("ic_today")
                   property var back: InputStyle.backIcon
+                  property var combobox: InputStyle.comboboxIcon
+                  property var valueRelationMore: InputStyle.valueRelationIcon
                 }
 
               property QtObject checkboxComponent: QtObject {

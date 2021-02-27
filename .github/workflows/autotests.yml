@@ -11,7 +11,7 @@ env:
 
 jobs:
   tests:
-    if: github.repository == 'lutraconsulting/input'
+    if: ( github.repository == 'lutraconsulting/input' ) && (!contains(github.event.head_commit.message, 'Translate '))
     runs-on: macos-latest
     steps:
       - name: Checkout Input

@@ -1,10 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ar" version="2.1">
 <context>
     <name>AboutPanel</name>
     <message>
         <location filename="../qml/AboutPanel.qml" line="106"/>
         <source>Developed by</source>
-        <translation>Développé par</translation>
+        <translation>طورت بواسطة</translation>
     </message>
 </context>
 <context>
@@ -12,57 +12,57 @@
     <message>
         <location filename="../qml/AccountPage.qml" line="150"/>
         <source>Your subscription was cancelled on %1</source>
-        <translation>Votre abonnement a été annulé le %1</translation>
+        <translation>تم إلغاء اشتراكك في٪ 1</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="47"/>
         <source>My Account</source>
-        <translation>Mon compte</translation>
+        <translation>حسابي</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="122"/>
         <source>Your subscription will not auto-renew after %1</source>
-        <translation>Votre abonnement ne sera pas renouvelé automatiquement après le %1</translation>
+        <translation>لن يتم تجديد اشتراكك تلقائيًا بعد٪ 1</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="131"/>
         <source>Please update your %1billing details%2 as soon as possible</source>
-        <translation>Veuillez mettre à jour vos %1détails de facturation%2 le plus rapidement possible</translation>
+        <translation>الرجاء تحديث تفاصيل الفواتير٪ 1 الخاصة بك٪ 2 في أقرب وقت ممكن</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="141"/>
         <source>Your next bill will be for %1 on %2</source>
-        <translation>Votre prochaine facture portera sur un montant de %1 et sera établie le %2 </translation>
+        <translation>ستكون فاتورتك التالية لـ٪ 1 في٪ 2</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="175"/>
         <source>Using %1 / %2</source>
-        <translation>Utilisé %1 / %2</translation>
+        <translation>استخدام٪ 1 /٪ 2</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="193"/>
         <source>Manage Subscription</source>
-        <translation>Gérer l&apos;abonnement</translation>
+        <translation>إدارة الاشتراك</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="193"/>
         <source>Working...</source>
-        <translation>En cours...</translation>
+        <translation>جاري العمل ...</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="193"/>
         <source>Subscription plans</source>
-        <translation>Plans d&apos;abonnement</translation>
+        <translation>خطط الاشتراك</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="229"/>
         <source>You can also %1restore%2 your purchases</source>
-        <translation>Vous pouvez également %1renouveler%2 vos achats</translation>
+        <translation>يمكنك أيضًا٪ 1 استعادة٪ 2 مشترياتك</translation>
     </message>
     <message>
         <location filename="../qml/AccountPage.qml" line="248"/>
         <source>Sign out</source>
-        <translation>Se déconnecter</translation>
+        <translation>خروج</translation>
     </message>
 </context>
 <context>
@@ -70,12 +70,12 @@
     <message>
         <location filename="../qml/ActiveLayerPanel.qml" line="50"/>
         <source>Choose Active Layer</source>
-        <translation>Choisir une couche active</translation>
+        <translation>اختر الطبقة النشطة</translation>
     </message>
     <message>
         <location filename="../qml/ActiveLayerPanel.qml" line="63"/>
         <source>Could not find any editable layers in the project. See %1how to enable digitizing in your project%2.</source>
-        <translation>Impossible de trouver des couches éditables dans ce projet. Voir %1comment activer la numérisation dans votre projet%2.</translation>
+        <translation>تعذر العثور على أي طبقات قابلة للتحرير في المشروع. راجع ٪ 1 كيفية تمكين التحويل الرقمي في مشروعك ٪ 2.</translation>
     </message>
 </context>
 <context>
@@ -83,22 +83,22 @@
     <message>
         <location filename="../androidutils.cpp" line="94"/>
         <source>Storage permission is permanently denied, please allow it in settings</source>
-        <translation>L&apos;autorisation de stockage est refusée en permanence, veuillez l&apos;autoriser dans les paramètres</translation>
+        <translation>إذن التخزين مرفوض بشكل دائم ، يرجى السماح به من الإعدادات</translation>
     </message>
     <message>
         <location filename="../androidutils.cpp" line="98"/>
         <source>Input needs a storage permission in order to manipulate or download a project</source>
-        <translation>Input nécessite une autorisation de stockage afin de pouvoir manipuler ou télécharger un projet</translation>
+        <translation>يحتاج إلى إذن تخزين من أجل معالجة أو تنزيل مشروع</translation>
     </message>
     <message>
         <location filename="../androidutils.cpp" line="132"/>
         <source>Camera permission is permanently denied, please allow it in settings</source>
-        <translation>L&apos;autorisation de la caméra est refusée en permanence, veuillez l&apos;autoriser dans les paramètres</translation>
+        <translation>تم رفض إذن الكاميرا بشكل دائم ، يرجى السماح به في الإعدادات</translation>
     </message>
     <message>
         <location filename="../androidutils.cpp" line="136"/>
         <source>We need a camera permission in order to take a photo</source>
-        <translation>Nous avons besoin d&apos;une autorisation pour prendre une photo</translation>
+        <translation>نحتاج إلى إذن الكاميرا لالتقاط صورة</translation>
     </message>
 </context>
 <context>
@@ -106,22 +106,22 @@
     <message>
         <location filename="../qml/AuthPanel.qml" line="79"/>
         <source>Login</source>
-        <translation>Connexion</translation>
+        <translation>تسجيل الدخول</translation>
     </message>
     <message>
         <location filename="../qml/AuthPanel.qml" line="79"/>
         <source>Register</source>
-        <translation>Inscription</translation>
+        <translation>تسجيل</translation>
     </message>
     <message>
         <location filename="../qml/AuthPanel.qml" line="124"/>
         <source>Please update Input to use the latest Mergin features.</source>
-        <translation>Veuillez mettre l&apos;application Input à jour pour pouvoir utiliser les derniers outils Mergin.</translation>
+        <translation>يرجى تحديث الإدخال لاستخدام أحدث ميزات Mergin.</translation>
     </message>
     <message>
         <location filename="../qml/AuthPanel.qml" line="128"/>
         <source>Mergin is currently unavailable - please try again later.</source>
-        <translation>Le serveur Mergin est actuellement indisponible - veuillez réessayer un peu plus tard.</translation>
+        <translation>Mergin غير متوفر حاليًا - يرجى المحاولة مرة أخرى لاحقًا.</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../qml/BrowseDataFeaturesPanel.qml" line="61"/>
         <source>Showing only the first %1 features</source>
-        <translation>Ne montrer que les premières %1 entités</translation>
+        <translation>إظهار 1% من الميزات الأولى فقط </translation>
     </message>
 </context>
 <context>
@@ -137,12 +137,12 @@
     <message>
         <location filename="../qml/BrowseDataLayersPanel.qml" line="31"/>
         <source>Layers</source>
-        <translation>Couches</translation>
+        <translation>طبقات</translation>
     </message>
     <message>
         <location filename="../qml/BrowseDataLayersPanel.qml" line="46"/>
         <source>No layers have been configured to allow browsing their features. See %1how to modify your project%2.</source>
-        <translation>Aucune couche n&apos;a été configurée pour permettre la consultation de leurs entités. Voir %1comment modifier votre projet%2.</translation>
+        <translation>لم يتم تكوين أي طبقات للسماح باستعراض ميزاتها، راجع ٪ 1 كيفية تعديل مشروعك٪ 2.</translation>
     </message>
 </context>
 <context>
@@ -150,12 +150,12 @@
     <message>
         <location filename="../qml/BrowseDataToolbar.qml" line="51"/>
         <source>Add Feature</source>
-        <translation>Ajouter une entité</translation>
+        <translation>إضافة ميزة</translation>
     </message>
     <message>
         <location filename="../qml/BrowseDataToolbar.qml" line="67"/>
         <source>Done</source>
-        <translation>Fait</translation>
+        <translation>منجز</translation>
     </message>
 </context>
 <context>
@@ -163,22 +163,22 @@
     <message>
         <location filename="../qml/ExternalResourceBundle.qml" line="191"/>
         <source>Open Image</source>
-        <translation>Ouvrir une image</translation>
+        <translation>افتح صورة</translation>
     </message>
     <message>
         <location filename="../qml/ExternalResourceBundle.qml" line="193"/>
         <source>Image files (*.gif *.png *.jpg)</source>
-        <translation>Fichiers image (*.gif *.png *.jpg)</translation>
+        <translation>ملفات الصور (* .gif * .png * .jpg)</translation>
     </message>
     <message>
         <location filename="../qml/ExternalResourceBundle.qml" line="205"/>
         <source>Remove photo reference</source>
-        <translation>Supprimer une référence photo</translation>
+        <translation>إزالة مرجع الصورة</translation>
     </message>
     <message>
         <location filename="../qml/ExternalResourceBundle.qml" line="206"/>
         <source>Also permanently delete photo from device?</source>
-        <translation>Supprimer également définitivement cette photo de votre appareil ?</translation>
+        <translation>هل تريد أيضًا حذف الصورة نهائيًا من الجهاز؟</translation>
     </message>
 </context>
 <context>
@@ -186,27 +186,27 @@
     <message>
         <location filename="../qml/FeaturePanel.qml" line="138"/>
         <source>Edit Feature</source>
-        <translation>Éditer une entité</translation>
+        <translation>تحرير الميزة</translation>
     </message>
     <message>
         <location filename="../qml/FeaturePanel.qml" line="138"/>
         <source>Feature</source>
-        <translation>Entité</translation>
+        <translation>خاصية</translation>
     </message>
     <message>
         <location filename="../qml/FeaturePanel.qml" line="157"/>
         <source>No photos added.</source>
-        <translation>Aucune photo n&apos;a été ajoutée.</translation>
+        <translation>لم تتم إضافة صور.</translation>
     </message>
     <message>
         <location filename="../qml/FeaturePanel.qml" line="290"/>
         <source>Delete feature</source>
-        <translation>Effacer une entité</translation>
+        <translation>حذف الميزة</translation>
     </message>
     <message>
         <location filename="../qml/FeaturePanel.qml" line="291"/>
         <source>Are you sure you want to delete this feature?</source>
-        <translation>Êtes-vous certain de vouloir effacer cette entité ?</translation>
+        <translation>هل أنت متأكد أنك تريد حذف هذه الميزة؟</translation>
     </message>
 </context>
 <context>
@@ -214,22 +214,22 @@
     <message>
         <location filename="../qml/FeatureToolbar.qml" line="63"/>
         <source>Edit</source>
-        <translation>Éditer</translation>
+        <translation>تعديل</translation>
     </message>
     <message>
         <location filename="../qml/FeatureToolbar.qml" line="86"/>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>حذف</translation>
     </message>
     <message>
         <location filename="../qml/FeatureToolbar.qml" line="102"/>
         <source>Save</source>
-        <translation>Enregistrer</translation>
+        <translation>حفظ</translation>
     </message>
     <message>
         <location filename="../qml/FeatureToolbar.qml" line="118"/>
         <source>Edit geometry</source>
-        <translation>Éditer la géométrie</translation>
+        <translation>تحرير الهندسة</translation>
     </message>
 </context>
 <context>
@@ -237,7 +237,7 @@
     <message>
         <location filename="../qml/components/FieldRow.qml" line="33"/>
         <source>Field name</source>
-        <translation>Nom du champ</translation>
+        <translation>اسم الحقل</translation>
     </message>
 </context>
 <context>
@@ -245,19 +245,18 @@
     <message>
         <location filename="../fieldsmodel.cpp" line="16"/>
         <source>Please fill a name of previous field before adding a new field.</source>
-        <translation>Veuillez donner un nom au champ précédent avant d&apos;ajouter un nouveau champ.</translation>
+        <translation>يرجى تعبئة اسم الحقل السابق قبل إضافة حقل جديد</translation>
     </message>
     <message>
         <location filename="../fieldsmodel.cpp" line="20"/>
         <source>Field %1 already exists.</source>
-        <translation>Le champ %1 existe déjà.</translation>
+        <translation>الحقل 1% موجود بالفعل</translation>
     </message>
     <message>
         <location filename="../fieldsmodel.cpp" line="118"/>
         <source>Field %1 already exists. 
 Won&apos;t be added to the project.</source>
-        <translation>Le champ %1 existe déjà.
-Ne sera pas ajouté au projet.</translation>
+        <translation>الحقل 1% موجود لن يتم إضافته إلى المشروع</translation>
     </message>
 </context>
 <context>
@@ -265,12 +264,12 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../inputhelp.cpp" line="177"/>
         <source>Report submitted.%1Please contact us on%1%2</source>
-        <translation>Rapport transmis.%1Veuillez nous contacter par courriel à l&apos;adresse%1%2</translation>
+        <translation>تم إرسال التقرير. ٪ 1 الرجاء الاتصال بنا على٪ 1٪ 2</translation>
     </message>
     <message>
         <location filename="../inputhelp.cpp" line="182"/>
         <source>Failed to submit report.%1Please check your internet connection.</source>
-        <translation>Impossible de transmettre le rapport.%1Veuillez contrôler votre connexion Internet.</translation>
+        <translation>فشل في تقديم التقرير 1% الرجاء التحقق من إتصالك بالإنترنت</translation>
     </message>
 </context>
 <context>
@@ -278,17 +277,17 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../inputprojutils.cpp" line="77"/>
         <source>Missing required PROJ datum shift grid: %1. For newly downloaded project please restart Input.</source>
-        <translation>Grille de transformation de coordonnées PROJ manquante : %1. Pour les nouveaux projets téléchargés veuillez redémarrer Input.</translation>
+        <translation>شبكة إزاحة بيانات الإسقاط المطلوبة مفقودة:٪ 1. للمشروع الذي تم تنزيله حديثًا ، يرجى إعادة تشغيل الإدخال</translation>
     </message>
     <message>
         <location filename="../inputprojutils.cpp" line="98"/>
         <source>Error creating custom PROJ operation. For newly downloaded project please restart Input.</source>
-        <translation>Erreur lors de la création d&apos;une PROJ personnalisée. Pour les nouveaux projets téléchargés veuillez redémarrer Input.</translation>
+        <translation>خطأ في إنشاء عملية الإسقاط المخصصة للمشروع الذي تم تنزيله حديثاً ، يرجى إعادة تشغيل الإدخال</translation>
     </message>
     <message>
         <location filename="../inputprojutils.cpp" line="108"/>
         <source>Missing required PROJ datum shift grids: %1. For newly downloaded project please restart Input.</source>
-        <translation>Grilles de transformation de coordonnées PROJ manquantes : %1. Pour les nouveaux projets téléchargés veuillez redémarrer Input.</translation>
+        <translation>شبكات إزاحة بيانات المشروع المطلوبة مفقودة:٪ 1. للمشروع الذي تم تنزيله حديثًا ، يرجى إعادة تشغيل الإدخال</translation>
     </message>
 </context>
 <context>
@@ -296,17 +295,17 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../localprojectsmanager.cpp" line="238"/>
         <source>Download failed, remove and retry</source>
-        <translation>Téléchargement échoué, supprimer et réessayer</translation>
+        <translation>فشل في التحميل ، يرجى الإزالة وإعادة المحاولة</translation>
     </message>
     <message>
         <location filename="../localprojectsmanager.cpp" line="258"/>
         <source>Found multiple QGIS project files</source>
-        <translation>Des fichiers de projet QGIS multiples ont été trouvés</translation>
+        <translation>QGIS تم العثور على عدة ملفات مشروع</translation>
     </message>
     <message>
         <location filename="../localprojectsmanager.cpp" line="263"/>
         <source>Failed to find a QGIS project file</source>
-        <translation>Impossible de trouver un fichier de projet QGIS</translation>
+        <translation>QGIS فشل في العثور على عدة ملفات مشروع</translation>
     </message>
 </context>
 <context>
@@ -314,17 +313,17 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/LogPanel.qml" line="45"/>
         <source>Diagnostic Log</source>
-        <translation>Journal de diagnostic</translation>
+        <translation>سجل التشخيص</translation>
     </message>
     <message>
         <location filename="../qml/LogPanel.qml" line="86"/>
         <source>Sending...</source>
-        <translation>Envoi en cours...</translation>
+        <translation>إرسال</translation>
     </message>
     <message>
         <location filename="../qml/LogPanel.qml" line="86"/>
         <source>Send Log to Developers</source>
-        <translation>Envoyer le journal aux développeurs</translation>
+        <translation>أرسل السجل إلى المطورين</translation>
     </message>
 </context>
 <context>
@@ -332,27 +331,27 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/LoginForm.qml" line="55"/>
         <source>%1Mergin%2 provides cloud-based sync between your mobile and desktop. Also use it to share your projects with others and work collaboratively.</source>
-        <translation>%1Mergin%2 utilise une synchronisation dans le cloud entre votre appareil mobile et votre ordinateur de bureau. Utilisez-le aussi pour partager vos projets avec les autres et travailler en mode collaboratif.</translation>
+        <translation>يوفر %1 مارجن %2 مزامنة قائمة على السحابة بين هاتفك المحمول وسطح المكتب. استخدمه أيضًا لمشاركة مشاريعك مع الآخرين والعمل بشكل تعاوني.</translation>
     </message>
     <message>
         <location filename="../qml/LoginForm.qml" line="98"/>
         <source>Username</source>
-        <translation>Nom d&apos;utilisateur</translation>
+        <translation>أسم المستخدم</translation>
     </message>
     <message>
         <location filename="../qml/LoginForm.qml" line="141"/>
         <source>Sign in</source>
-        <translation>Se connecter</translation>
+        <translation>تسجيل الدخول</translation>
     </message>
     <message>
         <location filename="../qml/LoginForm.qml" line="211"/>
         <source>Sign up for free</source>
-        <translation>S&apos;inscrire gratuitement</translation>
+        <translation>سجل مجانا</translation>
     </message>
     <message>
         <location filename="../qml/LoginForm.qml" line="237"/>
         <source>Forgot password?</source>
-        <translation>Mot de passe oublié?</translation>
+        <translation>نسيت كلمة المرور؟</translation>
     </message>
 </context>
 <context>
@@ -361,7 +360,7 @@ Ne sera pas ajouté au projet.</translation>
         <location filename="../qml/MainPanel.qml" line="61"/>
         <location filename="../qml/MainPanel.qml" line="247"/>
         <source>Projects</source>
-        <translation>Projets</translation>
+        <translation>المشاريع</translation>
     </message>
     <message>
         <location filename="../qml/MainPanel.qml" line="81"/>
@@ -373,45 +372,45 @@ Ne sera pas ajouté au projet.</translation>
         <location filename="../qml/MainPanel.qml" line="115"/>
         <location filename="../qml/MainPanel.qml" line="295"/>
         <source>Record</source>
-        <translation>Sauver</translation>
+        <translation>تسجيل</translation>
     </message>
     <message>
         <location filename="../qml/MainPanel.qml" line="143"/>
         <location filename="../qml/MainPanel.qml" line="322"/>
         <source>Zoom to project</source>
-        <translation>Se localiser</translation>
+        <translation>تكبير المشروع</translation>
     </message>
     <message>
         <location filename="../qml/MainPanel.qml" line="162"/>
         <source>Browse data</source>
-        <translation>Voir données</translation>
+        <translation>تصفح البيانات</translation>
     </message>
     <message>
         <location filename="../qml/MainPanel.qml" line="182"/>
         <location filename="../qml/MainPanel.qml" line="360"/>
         <source>Map themes</source>
-        <translation>Thèmes</translation>
+        <translation>مواضيع الخريطة</translation>
     </message>
     <message>
         <location filename="../qml/MainPanel.qml" line="202"/>
         <location filename="../qml/MainPanel.qml" line="379"/>
         <source>Settings</source>
-        <translation>Préférences</translation>
+        <translation>الإعدادات</translation>
     </message>
     <message>
         <location filename="../qml/MainPanel.qml" line="219"/>
         <source>More</source>
-        <translation>Plus</translation>
+        <translation>أكثر</translation>
     </message>
     <message>
         <location filename="../qml/MainPanel.qml" line="232"/>
         <source>Menu</source>
-        <translation>Menu</translation>
+        <translation>القائمة</translation>
     </message>
     <message>
         <location filename="../qml/MainPanel.qml" line="341"/>
         <source>Browse features</source>
-        <translation>Parcourir les entités</translation>
+        <translation>تصفح الميزات</translation>
     </message>
 </context>
 <context>
@@ -419,12 +418,12 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/MapThemePanel.qml" line="44"/>
         <source>Map Themes</source>
-        <translation>Thèmes</translation>
+        <translation>مواضيع الخريطة</translation>
     </message>
     <message>
         <location filename="../qml/MapThemePanel.qml" line="70"/>
         <source>Project has no themes defined. See %1how to setup themes%2.</source>
-        <translation>Aucun thème n&apos;a été défini pour ce projet. Voir %1comment paramétrer les thèmes%2.</translation>
+        <translation>المشروع ليس له مواضيع محددة، عيّن٪ 1 كيفية إعداد السمات٪ 2</translation>
     </message>
 </context>
 <context>
@@ -432,42 +431,42 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../merginapi.cpp" line="558"/>
         <source>Username must have at least 4 characters</source>
-        <translation>Le nom d&apos;utilisateur doit comporter au moins 4 caractères</translation>
+        <translation>يجب أن يحتوي اسم المستخدم على 4 أحرف على الأقل</translation>
     </message>
     <message>
         <location filename="../merginapi.cpp" line="565"/>
         <source>Please enter a valid email</source>
-        <translation>Veuillez saisir une adresse e-mail valide</translation>
+        <translation>يرجى إدخال البريد الإلكتروني الصحيح</translation>
     </message>
     <message>
         <location filename="../merginapi.cpp" line="572"/>
         <source>Password not strong enough. It must%1 be at least 8 characters long%1 contain lowercase characters%1 contain uppercase characters%1 contain digits or special characters</source>
-        <translation>Ce mot de passe n&apos;est pas assez sécurisé. Il doit%1 comporter au moins 8 caractères%1 contenir des caractères minuscules%1 contenir des caractères majuscules%1 contenir des chiffres ou des caractères spéciaux</translation>
+        <translation>كلمة المرور ليست قوية بما يكفي. يجب أن يتكون٪ 1 من 8 أحرف على الأقل.٪ 1 يحتوي على أحرف صغيرة٪ 1 يحتوي على أحرف كبيرة٪ 1 يحتوي على أرقام أو أحرف خاصة</translation>
     </message>
     <message>
         <location filename="../merginapi.cpp" line="585"/>
         <source>Passwords do not match</source>
-        <translation>Les mots de passe ne correspondent pas</translation>
+        <translation>كلمة المرور غير مطابقة</translation>
     </message>
     <message>
         <location filename="../merginapi.cpp" line="592"/>
         <source>Please accept Terms and Privacy Policy</source>
-        <translation>Veuillez accepter les termes et la politique de confidentialité</translation>
+        <translation>الرجاء قبول الشروط وسياسة الخصوصية</translation>
     </message>
     <message>
         <location filename="../merginapi.cpp" line="840"/>
         <source>Registration successful</source>
-        <translation>Inscription réussie</translation>
+        <translation>تم التسجيل بنجاح</translation>
     </message>
     <message>
         <location filename="../merginapi.cpp" line="1117"/>
         <source>Project detached from Mergin</source>
-        <translation>Projet indépendant de Mergin</translation>
+        <translation>المشروع منفصل عن مارجن</translation>
     </message>
     <message>
         <location filename="../merginapi.cpp" line="861"/>
         <source>New registrations are not allowed on the selected Mergin server.%1Please check with your administrator.</source>
-        <translation>Le serveur Mergin sélectionné n&apos;accepte pas de nouvelles inscriptions.%1Veuillez prendre contact avec votre administrateur.</translation>
+        <translation>التسجيلات الجديدة غير مسموح بها على الخادم مارجن المحدد.٪ 1 الرجاء التحقق من المسؤول.</translation>
     </message>
 </context>
 <context>
@@ -475,112 +474,112 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="211"/>
         <source>Projects</source>
-        <translation>Projets</translation>
+        <translation>المشاريع</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="461"/>
         <source>Unable to get the list of projects.</source>
-        <translation>Impossible de récupérer la liste des projets.</translation>
+        <translation>غير قادر على الحصول على قائمة المشاريع!</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="461"/>
         <source>No projects found!</source>
-        <translation>Aucun projet n&apos;a été trouvé !</translation>
+        <translation>لم يتم العثور على اي مشروع!</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="312"/>
         <source>Explore public projects.</source>
-        <translation>Explorer les projets publics.</translation>
+        <translation>استكشف المشاريع العامة.</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="380"/>
         <source>Create project</source>
-        <translation>Créer un projet</translation>
+        <translation>أنشئ مشروعًا</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="395"/>
         <source>No downloaded projects found.%1Learn %2how to create projects%3 and %4download them%3 onto your device.</source>
-        <translation>Aucun projet téléchargé n&apos;a été trouvé.%1Apprenez %2comment créer des projets%3 et %4les télécharger%3 sur votre appareil.</translation>
+        <translation>لم يتم العثور على مشاريع تم تنزيلها. ٪ 1 تعرف على٪ 2 كيفية إنشاء مشاريع٪ 3 و٪ 4 قم بتنزيلها٪ 3 على جهازك.</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="417"/>
         <source>Input needs a storage permission, %1click to grant it%2 and then restart application.</source>
-        <translation>Input nécessite une autorisation de stockage, %1cliquez pour l&apos;accorder %2 et ensuite redémarrer l&apos;application.</translation>
+        <translation>يحتاج الإدخال إلى إذن تخزين ،٪ 1 ​​انقر لمنحه٪ 2 ثم أعد تشغيل التطبيق</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="514"/>
         <source>Status</source>
-        <translation>Statut</translation>
+        <translation>الحالة</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="521"/>
         <source>No Changes</source>
-        <translation>Pas de modifications</translation>
+        <translation>لا تغيرات</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="531"/>
         <source>Detach from Mergin</source>
-        <translation>Détaché de Mergin</translation>
+        <translation>افصل عن الهامش</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="531"/>
         <source>Upload to Mergin</source>
-        <translation>Télécharger vers Mergin</translation>
+        <translation>تحميل إلى الهامش</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="548"/>
         <source>Remove from device</source>
-        <translation>Supprimer de l&apos;appareil</translation>
+        <translation>إحذفه من الجهاز</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="670"/>
         <source>Home</source>
-        <translation>Accueil</translation>
+        <translation>الصفحة الرئيسية</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="687"/>
         <source>My projects</source>
-        <translation>Mes projets</translation>
+        <translation>مشاريعي</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="706"/>
         <source>Shared with me</source>
-        <translation>Partagé avec moi</translation>
+        <translation>مشاركة معي</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="706"/>
         <source>Shared</source>
-        <translation>Partagé</translation>
+        <translation>مشاركة</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="725"/>
         <source>Explore</source>
-        <translation>Parcourir</translation>
+        <translation>استكشاف</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="746"/>
         <source>Remove project</source>
-        <translation>Supprimer le projet</translation>
+        <translation>إحذف المشروع</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="747"/>
         <source>Any unsynchronized changes will be lost.</source>
-        <translation>Toutes les modifications non-synchronisées seront perdues.</translation>
+        <translation>فقد أي تغييرات غير متزامنة.</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="774"/>
         <source>Input needs to be restarted</source>
-        <translation>Input doit être redémarré</translation>
+        <translation>الإدخال يحتاج إلى إعادة التشغيل</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="775"/>
         <source>To apply changes after granting storage permission, Input needs to be restarted. Click close and open Input again.</source>
-        <translation>Pour appliquer des modifications après avoir accordé une autorisation de stockage, Input doit être redémarré. Cliquez sur Fermer et ouvrez à nouveau Input.</translation>
+        <translation>لتطبيق التغييرات بعد منح إذن التخزين ، يجب إعادة تشغيل الإدخال. انقر فوق إغلاق وفتح الإدخال مرة أخرى</translation>
     </message>
     <message>
         <location filename="../qml/MerginProjectPanel.qml" line="794"/>
         <source>Retry</source>
-        <translation>Réessayer</translation>
+        <translation>أعد المحاولة</translation>
     </message>
 </context>
 <context>
@@ -588,12 +587,12 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../merginprojectstatusmodel.cpp" line="70"/>
         <source>Pending Changes</source>
-        <translation>Modifications en attente</translation>
+        <translation>تغييرات معلقة</translation>
     </message>
     <message>
         <location filename="../merginprojectstatusmodel.cpp" line="96"/>
         <source>Failed to determine changes</source>
-        <translation>Impossible de déterminer les modifications</translation>
+        <translation>فشل تحديد التغييرات</translation>
     </message>
 </context>
 <context>
@@ -601,7 +600,7 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/PanelHeader.qml" line="56"/>
         <source>Back</source>
-        <translation>Retour</translation>
+        <translation>للخلف</translation>
     </message>
 </context>
 <context>
@@ -609,7 +608,7 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/components/PasswordField.qml" line="15"/>
         <source>Password</source>
-        <translation>Mot de passe</translation>
+        <translation>كلمة المرور</translation>
     </message>
 </context>
 <context>
@@ -617,7 +616,7 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/ProjectDelegateItem.qml" line="174"/>
         <source>Fetch more</source>
-        <translation>En savoir plus</translation>
+        <translation>إحضار المزيد</translation>
     </message>
 </context>
 <context>
@@ -625,7 +624,7 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/ProjectLoadingScreen.qml" line="31"/>
         <source>Opening project ...</source>
-        <translation>Ouverture du projet en cours...</translation>
+        <translation>افتتاح المشروع</translation>
     </message>
 </context>
 <context>
@@ -633,12 +632,12 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/ProjectStatusPanel.qml" line="25"/>
         <source>No Changes</source>
-        <translation>Aucune modification</translation>
+        <translation>لا تغييرات</translation>
     </message>
     <message>
         <location filename="../qml/ProjectStatusPanel.qml" line="41"/>
         <source>Project Status</source>
-        <translation>Statut du projet</translation>
+        <translation>حالة المشروع</translation>
     </message>
 </context>
 <context>
@@ -646,7 +645,7 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../projectwizard.cpp" line="102"/>
         <source>Project %1 created</source>
-        <translation>Projet %1 créé</translation>
+        <translation>تم إنشاء المشروع 1%</translation>
     </message>
 </context>
 <context>
@@ -654,32 +653,32 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/ProjectWizardPage.qml" line="51"/>
         <source>Create Project</source>
-        <translation>Créer un Projet</translation>
+        <translation>إنشاء مشروع</translation>
     </message>
     <message>
         <location filename="../qml/ProjectWizardPage.qml" line="75"/>
         <source>Project name</source>
-        <translation>Nom du projet</translation>
+        <translation>إسم المشروع</translation>
     </message>
     <message>
         <location filename="../qml/ProjectWizardPage.qml" line="104"/>
         <source>Fields</source>
-        <translation>Champs</translation>
+        <translation>حقل</translation>
     </message>
     <message>
         <location filename="../qml/ProjectWizardPage.qml" line="133"/>
         <source>Add field</source>
-        <translation>Ajouter un champ</translation>
+        <translation>إضافة حقل</translation>
     </message>
     <message>
         <location filename="../qml/ProjectWizardPage.qml" line="172"/>
         <source>Create project</source>
-        <translation>Créer un projet</translation>
+        <translation>إنشاء مشروع</translation>
     </message>
     <message>
         <location filename="../qml/ProjectWizardPage.qml" line="178"/>
         <source>Empty project name</source>
-        <translation>Nom de projet vide</translation>
+        <translation>اسم المشروع فارغ</translation>
     </message>
 </context>
 <context>
@@ -687,27 +686,27 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../purchasing.cpp" line="517"/>
         <source>Failed to process payment details.%1Subscription is not purchased.</source>
-        <translation>Une erreur est apparue lors du traitement des détails du paiement.%1L&apos;abonnement n&apos;a pas été acheté.</translation>
+        <translation>ل في معالجة تفاصيل الدفع لم يتم شراء الاشتراك.</translation>
     </message>
     <message>
         <location filename="../purchasing.cpp" line="525"/>
         <source>Successfully restored your subscription</source>
-        <translation>Le renouvellement de votre abonnement s&apos;est déroulé avec succès</translation>
+        <translation>نجحت استعادة اشتراكك</translation>
     </message>
     <message>
         <location filename="../purchasing.cpp" line="527"/>
         <source>Successfully purchased subscription</source>
-        <translation>L&apos;achat de votre abonnement s&apos;est déroulé avec succès</translation>
+        <translation>تم شراء الاشتراك بنجاح</translation>
     </message>
     <message>
         <location filename="../purchasing.cpp" line="539"/>
         <source>Failed to purchase subscription</source>
-        <translation>L&apos;achat de votre abonnement a échoué</translation>
+        <translation>فشل في شراء الاشتراك</translation>
     </message>
     <message>
         <location filename="../purchasing.cpp" line="537"/>
         <source>Unable to restore your subscription</source>
-        <translation>Impossible de renouveler votre abonnement</translation>
+        <translation>غير قادر على استعادة اشتراكك</translation>
     </message>
 </context>
 <context>
@@ -715,22 +714,22 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../purchasing.cpp" line="117"/>
         <source>Monthly subscription</source>
-        <translation>Abonnement mensuel</translation>
+        <translation>اشتراك شهري</translation>
     </message>
     <message>
         <location filename="../purchasing.cpp" line="121"/>
         <source>Annual subscription</source>
-        <translation>Abonnement annuel</translation>
+        <translation>اشتراك سنوي</translation>
     </message>
     <message>
         <location filename="../purchasing.cpp" line="126"/>
         <source>month</source>
-        <translation>mois</translation>
+        <translation>شهر</translation>
     </message>
     <message>
         <location filename="../purchasing.cpp" line="130"/>
         <source>year</source>
-        <translation>année</translation>
+        <translation>سنة</translation>
     </message>
 </context>
 <context>
@@ -738,12 +737,12 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributeformmodelbase.cpp" line="288"/>
         <source>Not NULL</source>
-        <translation>Pas NULL</translation>
+        <translation>غير فارغة</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributeformmodelbase.cpp" line="293"/>
         <source>Unique</source>
-        <translation>Unique</translation>
+        <translation>فريد</translation>
     </message>
 </context>
 <context>
@@ -751,47 +750,47 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributemodel.cpp" line="184"/>
         <source>Value &quot;%1&quot; %4 could not be converted to a compatible value for field %2(%3).</source>
-        <translation>La valeur &quot;%1&quot; %4 n&apos;a pas pu être convertie en valeur compatible pour le champ %2(%3).</translation>
+        <translation>لا يمكن تحويل القيمة&quot;%1&quot; %4 إلى قيمة متوافقة للحقل %2(%3).</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributemodel.cpp" line="222"/>
         <source>Cannot update feature</source>
-        <translation>Impossible de mettre l&apos;entité à jour</translation>
+        <translation>لا يمكن تحديث الميزة</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributemodel.cpp" line="236"/>
         <source>Feature %1 could not be fetched after commit</source>
-        <translation>L&apos;entité %1 n&apos;a pas pu être chargée après l’enregistrement !</translation>
+        <translation>تعذر جلب الميزة %1 بعد التحديث</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributemodel.cpp" line="259"/>
         <source>Cannot delete feature</source>
-        <translation>Impossible d&apos;effacer l&apos;entité</translation>
+        <translation>لا يمكن حذف الميزة</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributemodel.cpp" line="307"/>
         <source>Default value expression for %1:%2 has parser error: %3</source>
-        <translation>L&apos;expression de la valeur par défaut pour %1:%2 a une erreur d&apos;analyse : %3</translation>
+        <translation>القيمة الافتراضية للتعبير 2%:1% لديها خطأ تحليل:3%</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributemodel.cpp" line="317"/>
         <source>Default value expression for %1:%2 has evaluation error: %3</source>
-        <translation>L&apos;expression de la valeur par défaut pour %1:%2 a une erreur d&apos;évaluation : %3</translation>
+        <translation>القيمة الافتراضية للتعبير 2%:1% لديها خطأ تقييم:3%</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributemodel.cpp" line="344"/>
         <source>Feature could not be added</source>
-        <translation>Impossible d&apos;ajouter l&apos;entité</translation>
+        <translation>تعذر إضافة الميزة</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributemodel.cpp" line="357"/>
         <source>Could not save changes. Rolling back.</source>
-        <translation>Impossible d&apos;enregistrer les modifications. Retour.</translation>
+        <translation>تعذر حفظ التغييرات. التراجع.</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/attributes/qgsquickattributemodel.cpp" line="377"/>
         <source>Cannot start editing</source>
-        <translation>Impossible de débuter l&apos;édition</translation>
+        <translation>لا يمكن بدء التحرير</translation>
     </message>
 </context>
 <context>
@@ -799,7 +798,7 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../../qgsquick/from_qgis/qgsquickmapcanvasmap.cpp" line="155"/>
         <source>Rendering</source>
-        <translation>Rendu</translation>
+        <translation>تقديم</translation>
     </message>
 </context>
 <context>
@@ -808,7 +807,7 @@ Ne sera pas ajouté au projet.</translation>
         <location filename="../../qgsquick/from_qgis/qgsquickmapsettings.cpp" line="206"/>
         <location filename="../../qgsquick/from_qgis/qgsquickmapsettings.cpp" line="226"/>
         <source>Map Canvas rotation is not supported. Resetting from %1 to 0.</source>
-        <translation>La rotation du canevas de carte n&apos;est pas prise en charge. Réinitialisation de %1 à 0.</translation>
+        <translation>تدوير قماش الخريطة غير مدعوم. إعادة التعيين من 1% إلى 0.</translation>
     </message>
 </context>
 <context>
@@ -816,7 +815,7 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../../qgsquick/from_qgis/qgsquickpositionkit.cpp" line="45"/>
         <source>Unable to create default GPS Position Source</source>
-        <translation>Impossible de créer une source de position GPS par défaut</translation>
+        <translation>ذر إنشاء الموقع الافتراضي  </translation>
     </message>
 </context>
 <context>
@@ -825,27 +824,27 @@ Ne sera pas ajouté au projet.</translation>
         <location filename="../../qgsquick/from_qgis/qgsquickutils.cpp" line="358"/>
         <source>screen resolution: %1x%2 px
 </source>
-        <translation>résolution de l&apos;écran : %1x%2 px
+        <translation>دقة الشاشة: 2%1x%  بيكسل
 </translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/qgsquickutils.cpp" line="359"/>
         <source>screen DPI: %1x%2
 </source>
-        <translation>DPI de l&apos;écran : %1x%2
+        <translation>شاشة :2%1x%
 </translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/qgsquickutils.cpp" line="360"/>
         <source>screen size: %1x%2 mm
 </source>
-        <translation>taille de l&apos;écran : %1x%2 mm
+        <translation>حجم الشاشة: 2%1x% ملم
 </translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/qgsquickutils.cpp" line="361"/>
         <source>screen density: %1</source>
-        <translation>densité de l&apos;écran : %1</translation>
+        <translation>كثافة الشاشة: %1 </translation>
     </message>
 </context>
 <context>
@@ -858,22 +857,22 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/RecordToolbar.qml" line="151"/>
         <source>Undo</source>
-        <translation>Annuler</translation>
+        <translation>تراجع</translation>
     </message>
     <message>
         <location filename="../qml/RecordToolbar.qml" line="166"/>
         <source>Add Point</source>
-        <translation>Ajouter un point</translation>
+        <translation>أضف نقطة</translation>
     </message>
     <message>
         <location filename="../qml/RecordToolbar.qml" line="182"/>
         <source>Done</source>
-        <translation>Fait</translation>
+        <translation>منتهي</translation>
     </message>
     <message>
         <location filename="../qml/RecordToolbar.qml" line="196"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation>إلغاء</translation>
     </message>
 </context>
 <context>
@@ -881,27 +880,27 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/RegistrationForm.qml" line="92"/>
         <source>Username</source>
-        <translation>Nom d&apos;utilisateur</translation>
+        <translation>أسم المستخدم</translation>
     </message>
     <message>
         <location filename="../qml/RegistrationForm.qml" line="147"/>
         <source>Email</source>
-        <translation>E-mail</translation>
+        <translation>البريد الإلكتروني</translation>
     </message>
     <message>
         <location filename="../qml/RegistrationForm.qml" line="189"/>
         <source>Confirm password</source>
-        <translation>Confirmer le mot de passe</translation>
+        <translation>تأكيد كلمة المرور</translation>
     </message>
     <message>
         <location filename="../qml/RegistrationForm.qml" line="214"/>
         <source>I accept the Mergin %1Terms and Conditions%3 and %2Privacy Policy%3</source>
-        <translation>J&apos;accepte les %1Termes et conditions%3 de Mergin et la %2Politique de confidentialité%3</translation>
+        <translation>أوافق على شروط وأحكام برنامج المارجن ٪ 1٪ 3 و٪ 2 سياسة الخصوصية٪ 3</translation>
     </message>
     <message>
         <location filename="../qml/RegistrationForm.qml" line="236"/>
         <source>Sign up</source>
-        <translation>S&apos;inscrire</translation>
+        <translation>سجل</translation>
     </message>
 </context>
 <context>
@@ -909,7 +908,7 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/SearchBar.qml" line="67"/>
         <source>SEARCH</source>
-        <translation>RECHERCHER</translation>
+        <translation>بحث</translation>
     </message>
 </context>
 <context>
@@ -917,7 +916,7 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="56"/>
         <source>Settings</source>
-        <translation>Préférences</translation>
+        <translation>الإعدادات</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="80"/>
@@ -927,52 +926,52 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="88"/>
         <source>Follow GPS with map</source>
-        <translation>Suivre le GPS avec la carte</translation>
+        <translation>تتبع GPS مع الخريطة</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="107"/>
         <source>GPS accuracy</source>
-        <translation>Précision du GPS</translation>
+        <translation>دقة GPS</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="162"/>
         <source>Accuracy threshold</source>
-        <translation>Seuil de précision</translation>
+        <translation>عتبة الدقة</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="180"/>
         <source>Recording</source>
-        <translation>Enregistrement en cours</translation>
+        <translation>تسجيل</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="187"/>
         <source>Line rec. interval</source>
-        <translation>Intervalle d&apos;enregistrement de la ligne</translation>
+        <translation>الفاصل الزمني لتسجيل الخط</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="210"/>
         <source>Reuse last value option</source>
-        <translation>Réutiliser la dernière valeur</translation>
+        <translation>إعادة استخدام خيار القيمة الأخيرة</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="234"/>
         <source>About</source>
-        <translation>À propos</translation>
+        <translation>حول</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="243"/>
         <source>Help</source>
-        <translation>Aide</translation>
+        <translation>مساعدة</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="252"/>
         <source>Privacy Policy</source>
-        <translation>Politique de confidentialité</translation>
+        <translation>سياسة الخصوصية</translation>
     </message>
     <message>
         <location filename="../qml/SettingsPanel.qml" line="261"/>
         <source>Diagnostic Log</source>
-        <translation>Journal de diagnostic</translation>
+        <translation>سجل التشخيص</translation>
     </message>
 </context>
 <context>
@@ -980,24 +979,24 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/SubscribePage.qml" line="60"/>
         <source>Subscribe</source>
-        <translation>S&apos;abonner</translation>
+        <translation>الإشتراك</translation>
     </message>
     <message>
         <location filename="../qml/SubscribePage.qml" line="95"/>
         <location filename="../qml/SubscribePage.qml" line="137"/>
         <source>Individual</source>
-        <translation>Individuel</translation>
+        <translation>فرد</translation>
     </message>
     <message>
         <location filename="../qml/SubscribePage.qml" line="112"/>
         <location filename="../qml/SubscribePage.qml" line="146"/>
         <source>Professional</source>
-        <translation>Professionnel</translation>
+        <translation>احترافي</translation>
     </message>
     <message>
         <location filename="../qml/SubscribePage.qml" line="162"/>
         <source>Your Mergin subscription plan will renew automatically. You can cancel or change it at any time. %1Learn More%2</source>
-        <translation>Votre plan d&apos;abonnement à Mergin se renouvellera automatiquement. Vous pouvez l&apos;annuler ou le modifier à tout moment. %1En savoir plus%2</translation>
+        <translation>سيتم تجديد خطة اشتراك الهامش الخاصة بك تلقائيًا ، ويمكنك إلغاءها أو تغييرها في أي وقت ،1% تعرف على المزيد2%</translation>
     </message>
 </context>
 <context>
@@ -1005,22 +1004,22 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/SubscribePlanItem.qml" line="36"/>
         <source>Plan</source>
-        <translation>Plan d&apos;abonnement</translation>
+        <translation>خطة</translation>
     </message>
     <message>
         <location filename="../qml/SubscribePlanItem.qml" line="54"/>
         <source>Unlimited collaborators</source>
-        <translation>Collaborateurs illimités</translation>
+        <translation>عدد غير محدود من المتعاونين</translation>
     </message>
     <message>
         <location filename="../qml/SubscribePlanItem.qml" line="60"/>
         <source>Unlimited projects</source>
-        <translation>Projets illimités</translation>
+        <translation>مشاريع غير محدودة</translation>
     </message>
     <message>
         <location filename="../qml/SubscribePlanItem.qml" line="66"/>
         <source>Email support</source>
-        <translation>Assistance par e-mail</translation>
+        <translation>دعم البريد الإلكتروني</translation>
     </message>
 </context>
 <context>
@@ -1028,37 +1027,37 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../qml/main.qml" line="98"/>
         <source>Recorded feature is not valid</source>
-        <translation>L&apos;entité enregistrée n&apos;est pas valide</translation>
+        <translation>الميزة المسجلة غير صالحة</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="444"/>
         <source>GPS auto-center mode on</source>
-        <translation>Mode d&apos;auto-centrage GPS activé</translation>
+        <translation>ضع مركز الأقمار الصناعية التلقائي قيد التشغيل </translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="444"/>
         <source>GPS auto-center mode off</source>
-        <translation>Mode d&apos;auto-centrage GPS désactivé</translation>
+        <translation>إيقاف تشغيل وضع المركز التلقائي لنظام الأقمار الصناعية</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="460"/>
         <source>No editable layers found.</source>
-        <translation>Aucune couche éditable n&apos;a pu être trouvée.</translation>
+        <translation>لم يتم العثور على طبقات قابلة للتحرير</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="494"/>
         <source>GPS currently unavailable.%1Try to allow GPS Location in your device settings.</source>
-        <translation>Le GPS n&apos;est actuellement pas disponible.%1Essayez d&apos;autoriser la Localisation par GPS dans les options de votre appareil.</translation>
+        <translation>GPS غير متوفر حاليًا ، حاول السماح لموقع GPS في الدخول لإعدادات جهازك</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="643"/>
         <source>Communication error</source>
-        <translation>Erreur de communication</translation>
+        <translation>خطأ في الاتصال</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="649"/>
         <source>PROJ Error</source>
-        <translation>Erreur PROJ</translation>
+        <translation>خطأ في الإسقاط</translation>
     </message>
 </context>
 <context>
@@ -1067,27 +1066,27 @@ Ne sera pas ajouté au projet.</translation>
         <location filename="../../qgsquick/from_qgis/plugin/editor/qgsquickdatetime.qml" line="44"/>
         <location filename="../../qgsquick/from_qgis/plugin/editor/qgsquickdatetime.qml" line="85"/>
         <source>(no date)</source>
-        <translation>(pas de date)</translation>
+        <translation>(لا تاريخ)</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/editor/qgsquickdatetime.qml" line="229"/>
         <source>Hours</source>
-        <translation>Heures</translation>
+        <translation>ساعات</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/editor/qgsquickdatetime.qml" line="253"/>
         <source>Minutes</source>
-        <translation>Minutes</translation>
+        <translation>الدقائق</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/editor/qgsquickdatetime.qml" line="276"/>
         <source>Seconds</source>
-        <translation>Secondes</translation>
+        <translation>ثواني</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/editor/qgsquickdatetime.qml" line="298"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>حسنا</translation>
     </message>
 </context>
 <context>
@@ -1095,17 +1094,17 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/editor/qgsquickexternalresource.qml" line="269"/>
         <source>Take a photo</source>
-        <translation>Prendre une photo</translation>
+        <translation>خذ صورة</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/editor/qgsquickexternalresource.qml" line="293"/>
         <source>Add from gallery</source>
-        <translation>Ajouter depuis la galerie</translation>
+        <translation>اضف من المعرض</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/editor/qgsquickexternalresource.qml" line="313"/>
         <source>Image is not available: </source>
-        <translation>L&apos;image n&apos;est pas disponible :</translation>
+        <translation>صورة غير متوفرة</translation>
     </message>
 </context>
 <context>
@@ -1113,37 +1112,37 @@ Ne sera pas ajouté au projet.</translation>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/qgsquickfeatureform.qml" line="175"/>
         <source>Constraints not valid</source>
-        <translation>Contraintes non valides</translation>
+        <translation>القيود غير صالحة</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/qgsquickfeatureform.qml" line="180"/>
         <source>Note: soft constraints were not met</source>
-        <translation>Remarque: les contraintes souples n&apos;ont pas été respectées</translation>
+        <translation>ملاحظة: لم يتم الوفاء بالقيود </translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/qgsquickfeatureform.qml" line="606"/>
         <source>Add feature on &lt;i&gt;%1&lt;/i&gt;</source>
-        <translation>Ajouter une entité sur &lt;i&gt;%1&lt;/i&gt;</translation>
+        <translation>اضف ميزة على &lt;i&gt;1%&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/qgsquickfeatureform.qml" line="608"/>
         <source>Edit feature on &lt;i&gt;%1&lt;/i&gt;</source>
-        <translation>Éditer l&apos;entité sur &lt;i&gt;%1&lt;/i&gt;</translation>
+        <translation>ميزة التحرير قيد التشغيل &lt;i&gt;1%&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/qgsquickfeatureform.qml" line="610"/>
         <source>View feature on &lt;i&gt;%1&lt;/i&gt;</source>
-        <translation>Voir l&apos;entité sur &lt;i&gt;%1&lt;/i&gt;</translation>
+        <translation>رؤية الميزة على &lt;i&gt;1%&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/qgsquickfeatureform.qml" line="650"/>
         <source>Delete feature</source>
-        <translation>Effacer l&apos;entité</translation>
+        <translation>حذف الميزة</translation>
     </message>
     <message>
         <location filename="../../qgsquick/from_qgis/plugin/qgsquickfeatureform.qml" line="651"/>
         <source>Really delete this feature?</source>
-        <translation>Souhaitez-vous réellement effacer cette entité ?</translation>
+        <translation>هل تريد حقًا حذف هذه الميزة؟</translation>
     </message>
 </context>
 </TS>

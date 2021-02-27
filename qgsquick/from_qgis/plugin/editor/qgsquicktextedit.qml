@@ -28,11 +28,10 @@ Item {
 
   id: fieldItem
   enabled: !readOnly
-  height: childrenRect.height
+  height: Math.max(textField.height, textArea.height)
   anchors {
     left: parent.left
     right: parent.right
-    rightMargin: 10 * QgsQuick.Utils.dp
   }
 
   TextField {
@@ -43,8 +42,10 @@ Item {
     visible: height !== 0
     anchors.left: parent.left
     anchors.right: parent.right
-    font.pixelSize: customStyle.fields.fontPixelSize
+    font.pointSize: customStyle.fields.fontPointSize
     color: customStyle.fields.fontColor
+    leftPadding: customStyle.fields.sideMargin
+    rightPadding: customStyle.fields.sideMargin
 
     text: value || ''
     inputMethodHints: field.isNumeric || widget == 'Range' ? field.precision === 0 ? Qt.ImhDigitsOnly : Qt.ImhFormattedNumbersOnly : Qt.ImhNone
@@ -82,11 +83,15 @@ Item {
     visible: height !== 0
     anchors.left: parent.left
     anchors.right: parent.right
-    font.pixelSize: customStyle.fields.fontPixelSize
+    font.pointSize: customStyle.fields.fontPointSize
     wrapMode: Text.Wrap
     color: customStyle.fields.fontColor
     text: value || ''
     textFormat: config['UseHtml'] ? TextEdit.RichText : TextEdit.PlainText
+    leftPadding: customStyle.fields.sideMargin
+    rightPadding: customStyle.fields.sideMargin
+
+    onLinkActivated: Qt.openUrlExternally(link)
 
     background: Rectangle {
         color: customStyle.fields.backgroundColor

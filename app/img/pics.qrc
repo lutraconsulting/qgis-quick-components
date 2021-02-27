@@ -53,5 +53,7 @@
         <file>eye.svg</file>
         <file>unlink.svg</file>
         <file>cloud-upload.svg</file>
+        <file>value_relation_open.svg</file>
+        <file>combobox.svg</file>
     </qresource>
 </RCC>

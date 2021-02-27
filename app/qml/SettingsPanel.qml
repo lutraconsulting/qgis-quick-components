@@ -87,8 +87,8 @@ Page {
                 color: InputStyle.clrPanelMain
                 text: qsTr("Follow GPS with map")
 
-                InputSwitch {
-                  id: autoCenterMapCheckBox
+                SettingsSwitch {
+                  id: autoCenterMapSwitch
 
                   checked: __appSettings.autoCenterMapChecked
                   onCheckedChanged: __appSettings.autoCenterMapChecked = checked
@@ -96,7 +96,7 @@ Page {
 
                 MouseArea {
                   anchors.fill: parent
-                  onClicked: autoCenterMapCheckBox.toggle()
+                  onClicked: autoCenterMapSwitch.toggle()
                 }
             }
 
@@ -209,8 +209,8 @@ Page {
                 color: InputStyle.clrPanelMain
                 text: qsTr("Reuse last value option")
 
-                InputSwitch {
-                  id: rememberValuesCheck
+                SettingsSwitch {
+                  id: rememberValuesSwitch
 
                   checked: __appSettings.reuseLastEnteredValues
                   onCheckedChanged: __appSettings.reuseLastEnteredValues = checked
@@ -218,7 +218,7 @@ Page {
 
                 MouseArea {
                   anchors.fill: parent
-                  onClicked: rememberValuesCheck.toggle()
+                  onClicked: rememberValuesSwitch.toggle()
                 }
             }
 

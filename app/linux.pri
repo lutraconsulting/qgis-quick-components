@@ -95,6 +95,9 @@
     LIBS += -L$${PROJ_LIB_DIR}
     LIBS += -lproj
 
+    # GDAL
+    INCLUDEPATH += $${OGR_INCLUDE_DIR}
+
     # TESTING stuff (only desktop)
     DEFINES += "INPUT_TEST"
     QT += testlib

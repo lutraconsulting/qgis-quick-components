@@ -2,6 +2,7 @@ name: QgsQuick
 on: [push]
 jobs:
   qgsquick_up_to_date:
+    if: ( github.repository == 'lutraconsulting/input' ) && (!contains(github.event.head_commit.message, 'Translate '))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

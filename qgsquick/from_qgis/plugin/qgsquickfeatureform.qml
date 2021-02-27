@@ -371,6 +371,11 @@ Item {
             }
 
             delegate: fieldItem
+
+            footer: Rectangle {
+              opacity: 1
+              height: 15 * QgsQuick.Utils.dp
+            }
           }
         }
       }
@@ -391,36 +396,57 @@ Item {
       anchors {
         left: parent.left
         right: parent.right
-        leftMargin: 12 * QgsQuick.Utils.dp
+        leftMargin: form.style.fields.outerMargin
+        rightMargin: form.style.fields.outerMargin
       }
 
-      Label {
-        id: fieldLabel
-
-        text: Name ? qsTr(Name) : ''
-        font.bold: true
-        color: ConstraintSoftValid && ConstraintHardValid ? form.style.constraint.validColor : form.style.constraint.invalidColor
-      }
-
-      Label {
-        id: constraintDescriptionLabel
+      Item {
+        id: labelPlaceholder
+        height: fieldLabel.height + constraintDescriptionLabel.height + 2 * form.style.fields.sideMargin
         anchors {
           left: parent.left
           right: parent.right
-          top: fieldLabel.bottom
+          topMargin: form.style.fields.sideMargin
+          bottomMargin: form.style.fields.sideMargin
         }
 
-        text: ConstraintDescription ? qsTr(ConstraintDescription) : ''
-        visible: !ConstraintHardValid || !ConstraintSoftValid
-        height: visible ? undefined : 0
-        wrapMode: Text.WordWrap
-        color: form.style.constraint.descriptionColor
+        Label {
+          id: fieldLabel
+
+          text: Name ? qsTr(Name) : ''
+          color: ConstraintSoftValid && ConstraintHardValid ? form.style.constraint.validColor : form.style.constraint.invalidColor
+          leftPadding: form.style.fields.sideMargin
+          font.pointSize: form.style.fields.labelPointSize
+          horizontalAlignment: Text.AlignLeft
+          verticalAlignment: Text.AlignVCenter
+          anchors.topMargin: form.style.fields.sideMargin
+          anchors.top: parent.top
+        }
+
+        Label {
+          id: constraintDescriptionLabel
+          anchors {
+            left: parent.left
+            right: parent.right
+            top: fieldLabel.bottom
+            leftMargin: form.style.fields.sideMargin
+          }
+
+          text: ConstraintDescription ? qsTr(ConstraintDescription) : ''
+          visible: (!ConstraintHardValid || !ConstraintSoftValid) && !!ConstraintDescription
+          height: visible ? undefined : 0
+          wrapMode: Text.WordWrap
+          color: form.style.constraint.descriptionColor
+          horizontalAlignment: Text.AlignLeft
+          verticalAlignment: Text.AlignVCenter
+        }
+
       }
 
       Item {
         id: placeholder
         height: childrenRect.height
-        anchors { left: parent.left; right: rememberCheckboxContainer.left; top: constraintDescriptionLabel.bottom }
+        anchors { left: parent.left; right: rememberCheckboxContainer.left; top: labelPlaceholder.bottom }
 
         Loader {
           id: attributeEditorLoader
@@ -497,11 +523,11 @@ Item {
         id: rememberCheckboxContainer
         visible: form.allowRememberAttribute && form.state === "Add" && EditorWidget !== "Hidden"
 
-        implicitWidth: visible ? 40 * QgsQuick.Utils.dp : 0
+        implicitWidth: visible ? 35 * QgsQuick.Utils.dp : 0
         implicitHeight: placeholder.height
 
         anchors {
-          top: constraintDescriptionLabel.bottom
+          top: labelPlaceholder.bottom
           right: parent.right
         }
 
@@ -512,8 +538,8 @@ Item {
 
           implicitWidth: 40 * QgsQuick.Utils.dp
           implicitHeight: width
-          x: -5 // hack to get over placeholder spacing
           y: rememberCheckboxContainer.height/2 - rememberCheckbox.height/2
+          x: (parent.width + form.style.fields.outerMargin) / 7
 
           onCheckboxClicked: RememberValue = buttonState
           checked: RememberValue ? true : false
@@ -610,7 +636,7 @@ Item {
             qsTr( 'View feature on <i>%1</i>' ).arg(layerName)
         }
         font.bold: true
-        font.pointSize: 16
+        font.pointSize:form.style.titleLabelPointSize
         elide: Label.ElideRight
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter

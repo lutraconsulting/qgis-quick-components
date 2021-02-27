@@ -2,6 +2,7 @@ name: Code Layout
 on: [push]
 jobs:
   code_style:
+    if: ( github.repository == 'lutraconsulting/input' ) && (!contains(github.event.head_commit.message, 'Translate '))
     runs-on: ubuntu-latest
     steps:
       - name: Install astyle
