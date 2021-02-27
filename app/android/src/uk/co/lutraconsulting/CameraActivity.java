@@ -92,7 +92,7 @@ public class CameraActivity extends Activity{
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = cameraFile.getAbsolutePath();
         String  exif; 
-        ExifInterface  = ExifInterface(imageFileName.getAbsolutePath());
+        final ExifInterface exif = new ExifInterface(imageFileName.getAbsolutePath());
         exif.setAttribute(ExifInterface.TAG_ORIENTATION, "" + getPhotoOrientation(configurationProvider.getSensorPosition()));
         exif.saveAttributes();
         return cameraFile;
