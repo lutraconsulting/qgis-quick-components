@@ -32,6 +32,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.provider.MediaStore;
 import android.graphics.Bitmap;
 import android.support.v4.content.FileProvider;
+import android.media.ExifInterface;
 
 public class CameraActivity extends Activity{
     private static final String TAG = "Camera Activity";
