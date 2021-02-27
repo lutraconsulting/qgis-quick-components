@@ -39,6 +39,10 @@ public class CameraActivity extends Activity{
     private static final int CAMERA_CODE = 102;
     private String targetPath;
     private File cameraFile;
+    private static final String TAG_GPS_IMG_DIRECTION = "GPSImgDirection";
+	private static final String TAG_GPS_IMG_DIRECTION_REF = "GPSImgDirectionRef";
+	private static final String TAG_DATETIME_ORIGINAL = "DateTimeOriginal";
+	private static final String TAG_DATETIME_DIGITIZED = "DateTimeDigitized";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +96,6 @@ public class CameraActivity extends Activity{
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = cameraFile.getAbsolutePath();
-        final ExifInterface exif = new ExifInterface(imageFileName.getAbsolutePath());
-        exif.setAttribute(ExifInterface.TAG_ORIENTATION, "" + getPhotoOrientation(configurationProvider.getSensorPosition()));
-        exif.saveAttributes();
         return cameraFile;
     }
     
