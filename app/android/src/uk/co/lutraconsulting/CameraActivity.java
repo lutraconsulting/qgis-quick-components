@@ -83,6 +83,14 @@ public class CameraActivity extends Activity{
         String currentPhotoPath;
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
+        String lat = exifInterface.getAttribute("GPSLatitude");
+        String lon = exifInterface.getAttribute("GPSLongitude");
+        String dir = exifInterface.getAttribute("GPSImgDirection");
+        String dir2 = exifInterface.getAttribute("M");
+        String dir3 = exifInterface.getAttribute("T");
+        String dir4 = exifInterface.getAttribute("GPSTrack");
+        String dir5 = exifInterface.getAttribute("GPSDestBearing");
+        String gpsInfo = exifInterface.getAttribute("GPSSatellites");
         
         cameraFile = File.createTempFile(imageFileName,  /* prefix */
                                          ".jpg",         /* suffix */
@@ -92,6 +100,10 @@ public class CameraActivity extends Activity{
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = cameraFile.getAbsolutePath();
         Log.d(TAG, "currentPhotoPath: "+currentPhotoPath);
+        Log.d(TAG, "readExif LAT: " + lat);
+        Log.d(TAG, "readExif LON: " + lon);
+        Log.d(TAG, "readExif DIR: " + dir + "," + dir2 + "," + dir3  + "," + dir4 + "," + dir5);
+        Log.d(TAG, "readExif INFO: " + gpsInfo );
         return cameraFile;
     }
     
