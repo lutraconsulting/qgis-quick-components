@@ -164,9 +164,17 @@ ApplicationWindow {
       }
     }
 
+    function isGpsAccuracyLow() {
+      return (positionKit.accuracy <= 0)  || (positionKit.accuracy > __appSettings.gpsAccuracyTolerance)
+    }
+
     function getGpsIndicatorColor() {
         if (positionKit.accuracy <= 0) return InputStyle.softRed
-        return positionKit.accuracy < __appSettings.gpsAccuracyTolerance ? InputStyle.softGreen : InputStyle.softOrange
+        return isGpsAccuracyLow() ? InputStyle.softOrange : InputStyle.softGreen
+    }
+
+    function checkGpsAccuracy() {
+        return (digitizing.useGpsPoint && isGpsAccuracyLow() ) ? true : false
     }
 
     function showMessage(message) {
@@ -477,6 +485,8 @@ ApplicationWindow {
         y: window.height - height
         visible: false
         gpsIndicatorColor: getGpsIndicatorColor()
+        showWarning: checkGpsAccuracy()
+        gpsAccuracyInfo: positionKit.accuracy // in accuracyUnits
         manualRecordig: digitizing.manualRecording
         // reset manualRecording after opening
         onVisibleChanged: if (visible) digitizing.manualRecording = true

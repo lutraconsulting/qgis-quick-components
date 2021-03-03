@@ -62,5 +62,6 @@
         <file>CodeReader.qml</file>
         <file>CodeReaderHandler.qml</file>
         <file>CodeReaderOverlay.qml</file>
+        <file>Banner.qml</file>
     </qresource>
 </RCC>

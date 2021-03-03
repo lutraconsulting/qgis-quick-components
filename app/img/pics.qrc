@@ -56,5 +56,6 @@
         <file>value_relation_open.svg</file>
         <file>combobox.svg</file>
         <file>qrcode.svg</file>
+        <file>exclamation-circle.svg</file>
     </qresource>
 </RCC>

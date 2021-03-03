@@ -33,6 +33,8 @@ Item {
     property bool pointLayerSelected: true
     property bool manualRecordig: false
     property bool extraPanelVisible: true
+    property bool showWarning: false
+    property string gpsAccuracyInfo: ""
 
     property QgsQuick.VectorLayer activeVectorLayer: __activeLayer.vectorLayer
     property string activeLayerName: activeVectorLayer ? activeVectorLayer.name : ""
@@ -60,58 +62,29 @@ Item {
         }
     }
 
-    Rectangle {
-        id: extraPanel
-        height: extraPanelHeight
-        width: parent.width
-        color: InputStyle.fontColorBright
-        visible: extraPanelVisible
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                layerLabelClicked()
-            }
-        }
+    Banner {
+      id: notificationBanner
+      height: extraPanelHeight
+      width: parent.width
+      visible: root.showWarning
+      source: InputStyle.exclamationIcon
+      bgColor: InputStyle.softOrange
+      fontColor: InputStyle.fontColor
+      text: qsTr("Low GPS position accuracy (%1m)").arg(root.gpsAccuracyInfo)
+      anchors.bottom: extraPanel.top
+    }
 
-        Row {
-            anchors.centerIn: parent
-            height: extraPanelHeight
-            spacing: 0
-
-            Item {
-                id: iconContainer
-                height: extraPanelHeight
-                width: extraPanelHeight
-
-                Image {
-                    id: icon
-                    anchors.fill: parent
-                    anchors.margins: extraPanelHeight/4
-                    sourceSize.width: width
-                    sourceSize.height: height
-                    source: root.activeLayerIcon
-                    fillMode: Image.PreserveAspectFit
-                }
-
-                ColorOverlay {
-                    anchors.fill: icon
-                    source: icon
-                    color: "white"
-                }
-            }
-
-            Text {
-                id: label
-                height: extraPanel.height
-                text: root.activeLayerName
-                color: "white"
-                font.bold: true
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                rightPadding: extraPanelHeight/4
-            }
-        }
+    Banner {
+      id: extraPanel
+      height: extraPanelHeight
+      width: parent.width
+      color: InputStyle.fontColorBright
+      fontColor: "white"
+      visible: extraPanelVisible
+      source: root.activeLayerIcon
+      text: root.activeLayerName
+      onClicked: layerLabelClicked()
     }
 
     RowLayout {
