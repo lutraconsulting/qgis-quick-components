@@ -9,63 +9,70 @@
  *                                                                         *
  ***************************************************************************/
 import QtQuick 2.7
+import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import "."
+import "./components"
 
 Rectangle {
-  property color fontColor: "white"
-  property color bgColor: InputStyle.fontColorBright
+  property color fontColor: InputStyle.fontColor
+  property color bgColor: InputStyle.softOrange
   property string text: ""
-  property string source: ""
+  property string source: InputStyle.exclamationIcon
+  property real padding: InputStyle.innerFieldMargin
+  property real rowHeight: InputStyle.rowHeight
+  property bool showWarning: true
+  property string link: "https://help.inputapp.io/" // TODO direct link to the GPDS accuracy section
 
   id: banner
   color: banner.bgColor
-
-  signal clicked
-
-  MouseArea {
-    anchors.fill: parent
-    onClicked: {
-      banner.clicked()
-    }
+  radius: InputStyle.cornerRadius
+  x: padding
+  height: childrenRect.height
+  anchors {
+    margins: padding
   }
 
-  Row {
-    anchors.centerIn: parent
-    height: banner.height
+  states: [
+      State { name: "show"; when: banner.showWarning;
+          PropertyChanges {   target: banner; opacity: 1.0    }
+      },
+      State { name: "fade"; when: !banner.showWarning;
+          PropertyChanges {   target: banner; opacity: 0.0    }
+      }
+  ]
+  transitions: Transition {
+      NumberAnimation { property: "opacity"; duration: 500}
+  }
+
+  ColumnLayout {
+    width: banner.width
     spacing: 0
 
-    Item {
-      id: iconContainer
-      height: banner.height
-      width: banner.height
-
-      Image {
-        id: icon
-        anchors.fill: parent
-        anchors.margins: banner.height / 4
-        sourceSize.width: width
-        sourceSize.height: height
-        source: banner.source
-        fillMode: Image.PreserveAspectFit
-      }
-
-      ColorOverlay {
-        anchors.fill: icon
-        source: icon
-        color: banner.fontColor
-      }
+    SimpleTextWithIcon {
+      height: banner.rowHeight
+      Layout.fillWidth: true
+      color: "transparent"
+      fontColor: banner.fontColor
+      source: banner.source
+      text: banner.text
     }
 
     Text {
-      id: label
-      height: banner.height
-      text: banner.text
+      Layout.fillWidth: true
       color: banner.fontColor
-      font.bold: true
+      bottomPadding: InputStyle.innerFieldMargin
       verticalAlignment: Text.AlignVCenter
       horizontalAlignment: Text.AlignHCenter
-      rightPadding: banner.height / 4
+      font.pixelSize: InputStyle.fontPixelSizeSmall
+      wrapMode: Text.WordWrap
+      textFormat: Text.RichText
+      text: "<style>a:link { color: " + InputStyle.highlightColor
+            + "; text-decoration: underline; }</style>" +
+            qsTr("More information <a href='%1'>here</a>.").arg(banner.link)
+
+      onLinkActivated: Qt.openUrlExternally(link)
     }
   }
+
 }

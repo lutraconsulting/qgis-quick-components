@@ -173,8 +173,8 @@ ApplicationWindow {
         return isGpsAccuracyLow() ? InputStyle.softOrange : InputStyle.softGreen
     }
 
-    function checkGpsAccuracy() {
-        return (digitizing.useGpsPoint && isGpsAccuracyLow() ) ? true : false
+    function showGpsAccuracyWarning() {
+        return (__appSettings.gpsAccuracyWarning && (digitizing.useGpsPoint || !digitizing.manualRecording) && isGpsAccuracyLow() )
     }
 
     function showMessage(message) {
@@ -485,7 +485,7 @@ ApplicationWindow {
         y: window.height - height
         visible: false
         gpsIndicatorColor: getGpsIndicatorColor()
-        showWarning: checkGpsAccuracy()
+        showWarning: showGpsAccuracyWarning()
         gpsAccuracyInfo: positionKit.accuracy // in accuracyUnits
         manualRecordig: digitizing.manualRecording
         // reset manualRecording after opening

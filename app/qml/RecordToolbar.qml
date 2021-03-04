@@ -14,6 +14,7 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import QgsQuick 0.1 as QgsQuick
 import "."  // import InputStyle singleton
+import "./components"  // import InputStyle singleton
 import lc 1.0
 
 Item {
@@ -44,6 +45,11 @@ Item {
     onClose: visible = false
     focus: true
 
+    //! Provides banner animation also when the toolbar is shown
+    onVisibleChanged: {
+      notificationBanner.state = visible ? "show" : "fade"
+    }
+
     Keys.onReleased: {
       if (event.key === Qt.Key_Back || event.key === Qt.Key_Escape) {
         event.accepted = true;
@@ -62,25 +68,22 @@ Item {
         }
     }
 
-
     Banner {
       id: notificationBanner
-      height: extraPanelHeight
-      width: parent.width
-      visible: root.showWarning
-      source: InputStyle.exclamationIcon
-      bgColor: InputStyle.softOrange
-      fontColor: InputStyle.fontColor
+      width: parent.width - notificationBanner.anchors.margins * 2
+      showWarning: root.showWarning
       text: qsTr("Low GPS position accuracy (%1m)").arg(root.gpsAccuracyInfo)
       anchors.bottom: extraPanel.top
+      rowHeight: InputStyle.rowHeight
     }
 
-    Banner {
+    SimpleTextWithIcon {
       id: extraPanel
       height: extraPanelHeight
       width: parent.width
       color: InputStyle.fontColorBright
       fontColor: "white"
+      fontPixelSize: InputStyle.fontPixelSizeSmall
       visible: extraPanelVisible
       source: root.activeLayerIcon
       text: root.activeLayerName

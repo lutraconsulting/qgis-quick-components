@@ -20,6 +20,7 @@ AppSettings::AppSettings( QObject *parent ): QObject( parent )
   QString layer = settings.value( "defaultLayer/"  + path, "" ).toString();
   bool autoCenter = settings.value( "autoCenter", false ).toBool();
   int gpsTolerance = settings.value( "gpsTolerance", 10 ).toInt();
+  bool gpsAccuracyWarning = settings.value( "gpsAccuracyWarning", true ).toBool();
   int lineRecordingInterval = settings.value( "lineRecordingInterval", 3 ).toInt();
   bool reuseLastEnteredValues = settings.value( "reuseLastEnteredValues", false ).toBool();
   settings.endGroup();
@@ -29,6 +30,7 @@ AppSettings::AppSettings( QObject *parent ): QObject( parent )
   setDefaultLayer( layer );
   setAutoCenterMapChecked( autoCenter );
   setGpsAccuracyTolerance( gpsTolerance );
+  setGpsAccuracyWarning( gpsAccuracyWarning );
   setLineRecordingInterval( lineRecordingInterval );
   setReuseLastEnteredValues( reuseLastEnteredValues );
 }
@@ -162,6 +164,21 @@ void AppSettings::setReuseLastEnteredValues( bool reuseLastEnteredValues )
     setValue( "reuseLastEnteredValues", reuseLastEnteredValues );
     mReuseLastEnteredValues = reuseLastEnteredValues;
     emit reuseLastEnteredValuesChanged( mReuseLastEnteredValues );
+  }
+}
+
+bool AppSettings::gpsAccuracyWarning() const
+{
+  return mGpsAccuracyWarning;
+}
+
+void AppSettings::setGpsAccuracyWarning( bool gpsAccuracyWarning )
+{
+  if ( mGpsAccuracyWarning != gpsAccuracyWarning )
+  {
+    mGpsAccuracyWarning = gpsAccuracyWarning;
+    setValue( "gpsAccuracyWarning", gpsAccuracyWarning );
+    emit gpsAccuracyWarningChanged();
   }
 }
 

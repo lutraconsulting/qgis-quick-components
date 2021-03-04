@@ -385,7 +385,7 @@ QString Loader::loadIconFromLayer( QgsMapLayer *layer )
     return iconFromGeometry( geometry );
   }
   else
-    return QString( "mIconRasterLayer.svg" );
+    return QString( "qrc:/mIconRasterLayer.svg" );
 }
 
 QString Loader::loadIconFromFeature( QgsFeature feature )
@@ -397,9 +397,9 @@ QString Loader::iconFromGeometry( const QgsWkbTypes::GeometryType &geometry )
 {
   switch ( geometry )
   {
-    case QgsWkbTypes::GeometryType::PointGeometry: return QString( "mIconPointLayer.svg" );
-    case QgsWkbTypes::GeometryType::LineGeometry: return QString( "mIconLineLayer.svg" );
-    case QgsWkbTypes::GeometryType::PolygonGeometry: return QString( "mIconPolygonLayer.svg" );
-    default: return QString( "mIconTableLayer.svg" );
+    case QgsWkbTypes::GeometryType::PointGeometry: return QString( "qrc:/mIconPointLayer.svg" );
+    case QgsWkbTypes::GeometryType::LineGeometry: return QString( "qrc:/mIconLineLayer.svg" );
+    case QgsWkbTypes::GeometryType::PolygonGeometry: return QString( "qrc:/mIconPolygonLayer.svg" );
+    default: return QString( "qrc:/mIconTableLayer.svg" );
   }
 }

@@ -174,6 +174,24 @@ Page {
                 }
             }
 
+            PanelItem {
+                height: settingsPanel.rowHeight
+                width: parent.width
+                text: qsTr("Accuracy warning")
+
+                SettingsSwitch {
+                  id: accuracyWarningSwitch
+
+                  checked: __appSettings.gpsAccuracyWarning
+                  onCheckedChanged: __appSettings.gpsAccuracyWarning = checked
+                }
+
+                MouseArea {
+                  anchors.fill: parent
+                  onClicked: accuracyWarningSwitch.toggle()
+                }
+            }
+
             // Header "Recording"
             PanelItem {
                 color: InputStyle.panelBackgroundLight
