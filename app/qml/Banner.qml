@@ -1,5 +1,3 @@
-
-
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -51,6 +49,12 @@ Rectangle {
   layer.enabled: true
   layer.effect: Shadow { verticalOffset: 0 }
 
+  //! Prevents propagating events to other components while banner is shown (e.g no map panning)
+  MouseArea {
+    anchors.fill: banner
+    enabled: banner.showWarning
+  }
+
   ColumnLayout {
     width: banner.width
     spacing: 0
@@ -64,6 +68,7 @@ Rectangle {
       bgColor: banner.bgColor
       source: banner.source
       textItem.font.bold: true
+      textItem.rightPadding: InputStyle.innerFieldMargin
       textItem.text: "<style>a:link { color: " + banner.linkColor
             + "; text-decoration: underline; }</style>" +
             qsTr("%1 <br><a href='%2'>Learn more</a>").arg(banner.text).arg(banner.link)

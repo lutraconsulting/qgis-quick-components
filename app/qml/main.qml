@@ -174,7 +174,7 @@ ApplicationWindow {
     }
 
     function showGpsAccuracyWarning() {
-      return (__appSettings.gpsAccuracyWarning && (digitizing.useGpsPoint || !digitizing.manualRecording) && isGpsAccuracyLow() )
+      return (__appSettings.gpsAccuracyWarning && positionKit.hasPosition && (digitizing.useGpsPoint || !digitizing.manualRecording) && isGpsAccuracyLow() )
     }
 
     function showMessage(message) {
