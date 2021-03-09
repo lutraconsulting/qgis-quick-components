@@ -22,6 +22,8 @@ Row {
   property color fontColor: InputStyle.fontColor
   property color iconColor: InputStyle.fontColor
 
+  property alias textItem: textItem
+
   signal linkActivated(string link)
 
   Rectangle {

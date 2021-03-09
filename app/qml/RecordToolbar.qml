@@ -34,8 +34,6 @@ Item {
     property bool pointLayerSelected: true
     property bool manualRecordig: false
     property bool extraPanelVisible: true
-    property bool showWarning: false
-    property string gpsAccuracyInfo: ""
 
     property QgsQuick.VectorLayer activeVectorLayer: __activeLayer.vectorLayer
     property string activeLayerName: activeVectorLayer ? activeVectorLayer.name : ""
@@ -44,11 +42,6 @@ Item {
     id: root
     onClose: visible = false
     focus: true
-
-    //! Provides banner animation also when the toolbar is shown
-    onVisibleChanged: {
-      notificationBanner.state = visible ? "show" : "fade"
-    }
 
     Keys.onReleased: {
       if (event.key === Qt.Key_Back || event.key === Qt.Key_Escape) {
@@ -66,15 +59,6 @@ Item {
           anchors.fill: parent
           onClicked: {} // dont do anything, just do not let click event propagate
         }
-    }
-
-    Banner {
-      id: notificationBanner
-      width: parent.width - notificationBanner.anchors.margins * 2
-      showWarning: root.showWarning
-      text: qsTr("Low GPS position accuracy (%1m)").arg(root.gpsAccuracyInfo)
-      anchors.bottom: extraPanel.top
-      rowHeight: InputStyle.rowHeight
     }
 
     SimpleTextWithIcon {

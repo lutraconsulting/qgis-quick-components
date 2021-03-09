@@ -15,61 +15,58 @@ import "."
 import "./components"
 
 Rectangle {
-  property color fontColor: InputStyle.fontColor
-  property color bgColor: InputStyle.softOrange
+  property color fontColor: "black"
+  property color linkColor: fontColor
+  property color bgColor: InputStyle.warningBannerColor
   property string text: ""
+  property string link: ""
   property string source: InputStyle.exclamationIcon
   property real padding: InputStyle.innerFieldMargin
-  property real rowHeight: InputStyle.rowHeight
-  property bool showWarning: true
-  property string link: "https://help.inputapp.io/" // TODO direct link to the GPDS accuracy section
+  property bool showWarning: false
 
   id: banner
   color: banner.bgColor
   radius: InputStyle.cornerRadius
   x: padding
+  y: padding
   height: childrenRect.height
   anchors {
     margins: padding
   }
+  state:"fade"
 
   states: [
-      State { name: "show"; when: banner.showWarning;
-          PropertyChanges {   target: banner; opacity: 1.0    }
-      },
-      State { name: "fade"; when: !banner.showWarning;
-          PropertyChanges {   target: banner; opacity: 0.0    }
-      }
+    State { name: "show"; when: banner.showWarning;
+      PropertyChanges { target: banner; opacity: 1.0 }
+    },
+    State { name: "fade"; when: !banner.showWarning;
+      PropertyChanges { target: banner; opacity: 0.0 }
+    }
   ]
+
   transitions: Transition {
-      NumberAnimation { property: "opacity"; duration: 500}
+    NumberAnimation { property: "opacity"; duration: 500 }
   }
+
+  layer.enabled: true
+  layer.effect: Shadow { verticalOffset: 0 }
 
   ColumnLayout {
     width: banner.width
     spacing: 0
+    anchors.centerIn: banner
 
-    SimpleTextWithIcon {
-      height: banner.rowHeight
+    TextWithIcon {
+      id: content
       Layout.fillWidth: true
-      color: "transparent"
       fontColor: banner.fontColor
+      iconColor: banner.fontColor
+      bgColor: banner.bgColor
       source: banner.source
-      text: banner.text
-    }
-
-    Text {
-      Layout.fillWidth: true
-      color: banner.fontColor
-      bottomPadding: InputStyle.innerFieldMargin
-      verticalAlignment: Text.AlignVCenter
-      horizontalAlignment: Text.AlignHCenter
-      font.pixelSize: InputStyle.fontPixelSizeSmall
-      wrapMode: Text.WordWrap
-      textFormat: Text.RichText
-      text: "<style>a:link { color: " + InputStyle.highlightColor
+      textItem.font.bold: true
+      textItem.text: "<style>a:link { color: " + banner.linkColor
             + "; text-decoration: underline; }</style>" +
-            qsTr("More information <a href='%1'>here</a>.").arg(banner.link)
+            qsTr("%1 <br><a href='%2'>Learn more</a>").arg(banner.text).arg(banner.link)
 
       onLinkActivated: Qt.openUrlExternally(link)
     }

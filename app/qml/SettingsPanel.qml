@@ -177,7 +177,7 @@ Page {
             PanelItem {
                 height: settingsPanel.rowHeight
                 width: parent.width
-                text: qsTr("Accuracy warning")
+                text: qsTr("Show accuracy warning")
 
                 SettingsSwitch {
                   id: accuracyWarningSwitch

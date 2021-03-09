@@ -29,6 +29,7 @@ QtObject {
     property color labelColor: "#999999"
 
     property color highlightColor: "#FD9626"
+    property color warningBannerColor: "#FFFF99"
     property color softRed: "#FC9FB1"
     property color softOrange: "#FDD7B1"
     property color softGreen: "#32AA3A"

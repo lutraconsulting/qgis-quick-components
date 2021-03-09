@@ -104,6 +104,11 @@ QString InputUtils::formatProjectName( const QString &fullProjectName )
   }
 }
 
+QString InputUtils::formatNumber( const double number, int precision )
+{
+  return QString::number( number, 'f', precision );
+}
+
 void InputUtils::setExtentToFeature( const QgsQuickFeatureLayerPair &pair, QgsQuickMapSettings *mapSettings, double panelOffsetRatio )
 {
 
