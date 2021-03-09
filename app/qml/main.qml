@@ -576,7 +576,7 @@ ApplicationWindow {
     Connections {
         target: mapCanvas.mapSettings
         onExtentChanged: {
-            digitizing.useGpsPoint = false // TODO @vsklencar
+            digitizing.useGpsPoint = false
             scaleBar.visible = true
         }
     }

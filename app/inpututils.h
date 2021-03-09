@@ -36,7 +36,6 @@ class InputUtils: public QObject
 
     Q_INVOKABLE QString getFileName( const QString &filePath );
     Q_INVOKABLE QString formatProjectName( const QString &fullProjectName );
-    Q_INVOKABLE QString formatNumber( const double number, int precision = 2 );
 
     Q_INVOKABLE void setExtentToFeature( const QgsQuickFeatureLayerPair &pair, QgsQuickMapSettings *mapSettings, double panelOffsetRatio );
 
