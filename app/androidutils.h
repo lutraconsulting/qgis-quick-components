@@ -34,6 +34,9 @@ class AndroidUtils: public QObject
     static void requirePermissions();
     static bool checkAndAcquirePermissions( const QString &permissionString );
 
+    //! Calls getEXIFAttribute from Java
+    static QString getExifInfo( const QString &filePath );
+
     Q_INVOKABLE bool requestStoragePermission();
 
     /**
