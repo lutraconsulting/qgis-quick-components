@@ -13,25 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// TODO revise imports
 import android.os.Bundle;
 import android.os.Environment;
 import android.net.Uri;
-import android.app.Dialog;
-import android.app.AlertDialog;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.LinearLayout;
-import android.widget.Button;
-//import android.view.View.OnClickListener;
-//import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.util.Log;
-import android.graphics.drawable.ColorDrawable;
 import android.provider.MediaStore;
 import android.graphics.Bitmap;
 import android.support.v4.content.FileProvider;
@@ -46,7 +35,7 @@ import android.hardware.SensorManager;
 public class CameraActivity extends Activity implements SensorEventListener {
     private static final String TAG = "Camera Activity";
     private static final int CAMERA_CODE = 102;
-    // GPS EXIF TAGS // TODO use correct tags
+    // GPS EXIF TAGS
     private static final String GPS_BEARING_TAG = "GPSDestBearing";
     private static final String GPS_LON_TAG = "GPSDestLongitude";
     private static final String GPS_LAT_TAG = "GPSDestLatitude";
@@ -56,7 +45,8 @@ public class CameraActivity extends Activity implements SensorEventListener {
     private File cameraFile;
 
     // Sensors
-    int SENSOR_DELAY = 1000000; // time in us, so 1000000 is second // suggested: SensorManager.SENSOR_DELAY_NORMAL;
+    int SENSOR_DELAY_MS = 500;
+    int SENSOR_DELAY = SENSOR_DELAY_MS * 1000;
     private SensorManager mSensorManager;
     private Sensor mSensorAccelerometer;
     private Sensor mSensorMagnetometer;
@@ -121,12 +111,6 @@ public class CameraActivity extends Activity implements SensorEventListener {
     protected void onStart() {
         super.onStart();
 
-        // Listeners for the sensors are registered in this callback and
-        // can be unregistered in onStop().
-        //
-        // Check to ensure sensors are available before registering listeners.
-        // Both listeners are registered with a "normal" amount of delay
-        // (SENSOR_DELAY_NORMAL).
         if (mSensorAccelerometer != null) {
             mSensorManager.registerListener(this, mSensorAccelerometer,
                     SENSOR_DELAY);
@@ -135,14 +119,6 @@ public class CameraActivity extends Activity implements SensorEventListener {
             mSensorManager.registerListener(this, mSensorMagnetometer,
                     SENSOR_DELAY);
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // Unregister all sensor listeners in this callback so they don't
-        // continue to use resources when the app is stopped.
-        // mSensorManager.unregisterListener(this);
     }
 
     @Override
@@ -172,7 +148,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
         boolean rotationOK = SensorManager.getRotationMatrix(rotationMatrix,
                 null, mAccelerometerData, mMagnetometerData);
 
-        // Remap the matrix based on current device/activity rotation. // TODO
+        // Remap the matrix based on current device/activity rotation.
         float[] rotationMatrixAdjusted = new float[9];
         rotationMatrixAdjusted = rotationMatrix.clone();
 
@@ -191,8 +167,8 @@ public class CameraActivity extends Activity implements SensorEventListener {
 
         // angle in degree [0 - 360] degree
         double degrees = (Math.toDegrees(orientationValues[0]) + 360) % 360;
+        // Store azimuth value
         azimuthData.put(System.currentTimeMillis(), degrees);
-        Log.d(TAG, "!! onSensorChanged: " + degrees + "|" + azimuth + "," + pitch + "," + roll);
     }
 
 
@@ -227,48 +203,50 @@ public class CameraActivity extends Activity implements SensorEventListener {
         Log.d(TAG, "onActivityResult()");
         Log.d(TAG, "request: " + requestCode);
         Log.d(TAG, "resultCode: " + resultCode);
-        if (requestCode == CAMERA_CODE && resultCode == Activity.RESULT_OK)
-            mSensorManager.unregisterListener(this);
+        mSensorManager.unregisterListener(this);
 
-        Log.d(TAG, "tmp exists: " + cameraFile.exists());
-        Log.d(TAG, "tmp path: " + cameraFile.getAbsolutePath());
-        Log.d(TAG, "EXIF test: " + targetPath);
+        if (requestCode == CAMERA_CODE && resultCode == Activity.RESULT_OK) {
+            Log.d(TAG, "tmp exists: " + cameraFile.exists());
+            Log.d(TAG, "tmp path: " + cameraFile.getAbsolutePath());
 
-        try {
-            long captureTime = cameraFile.lastModified();
-            double degrees = getAzimuthByTime(captureTime);
-            EXIFUtils.writeExifGpsDirection(cameraFile.getAbsolutePath(), degrees);
-            EXIFUtils.getExifGpsAttributes(cameraFile.getAbsolutePath());
+            try {
+                long captureTime = cameraFile.lastModified();
+                Log.d(TAG, "CAPTURE TIME: " + captureTime);
+                Log.d(TAG, "NOW TIME: " + System.currentTimeMillis());
+                Log.d(TAG, "DIFF TIME: " + (System.currentTimeMillis() - captureTime));
+                double degrees = getAzimuthByTime(captureTime);
+                EXIFUtils.writeExifGpsDirection(cameraFile.getAbsolutePath(), degrees);
+                EXIFUtils.getExifGpsAttributes(cameraFile.getAbsolutePath()); // TODO remove
 
-            // TODO clear data
-            azimuthData.clear();
+                copyFile(cameraFile, new File(targetPath, cameraFile.getName()));
+                if (data == null) {
+                    data = getIntent();
+                }
+                data.putExtra("__RESULT__", cameraFile.getAbsolutePath());
+                setResult(Activity.RESULT_OK, data);
 
-            copyFile(cameraFile, new File(targetPath, cameraFile.getName()));
-            if (data == null) {
-                data = getIntent();
+            } catch (IOException e) {
+                Intent intent = this.getIntent();
+                if (data == null) {
+                    data = getIntent();
+                }
+                data.putExtra("__RESULT__", e.getMessage());
+                setResult(Activity.RESULT_CANCELED, data);
             }
-            data.putExtra("__RESULT__", cameraFile.getAbsolutePath());
-            setResult(Activity.RESULT_OK, data);
 
-        } catch (IOException e) {
-            Intent intent = this.getIntent();
-            if (data == null) {
-                data = getIntent();
-            }
-            data.putExtra("__RESULT__", e.getMessage());
-            setResult(Activity.RESULT_CANCELED, data);
+            // TODO: after copy, verify if is correctly copied and then remove the old one
+            finish();
         }
-
-        // TODO: after copy, verify if is correctly copied and then remove the old one
-        finish();
+        azimuthData.clear();
     }
 
     private double getAzimuthByTime(long time) {
         List<Double> result = azimuthData.entrySet().stream()
-                .filter(x -> Math.abs(x.getKey() - time) <= SENSOR_DELAY)
+                .filter(x -> Math.abs(x.getKey() - time) <= SENSOR_DELAY_MS)
                 .map(x->x.getValue())
                 .collect(Collectors.toList());
         if (result.isEmpty()) return -1;
+        Log.d(TAG, "AZIMUHT DATA: " + result);
         return result.get(0);
     }
 
