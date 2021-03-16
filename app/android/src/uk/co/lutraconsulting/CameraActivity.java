@@ -9,13 +9,15 @@ import java.io.OutputStream;
 import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import android.os.Bundle;
 import android.os.Environment;
 import android.net.Uri;
+import android.view.Display;
+import android.view.Surface;
+import android.view.WindowManager;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -35,18 +37,13 @@ import android.hardware.SensorManager;
 public class CameraActivity extends Activity implements SensorEventListener {
     private static final String TAG = "Camera Activity";
     private static final int CAMERA_CODE = 102;
-    // GPS EXIF TAGS
-    private static final String GPS_BEARING_TAG = "GPSDestBearing";
-    private static final String GPS_LON_TAG = "GPSDestLongitude";
-    private static final String GPS_LAT_TAG = "GPSDestLatitude";
-    private static final String GPS_DATE_TAG = "GPSDateStamp";
 
     private String targetPath;
     private File cameraFile;
 
     // Sensors
-    int SENSOR_DELAY_MS = 500;
-    int SENSOR_DELAY = SENSOR_DELAY_MS * 1000;
+    int SENSOR_DELAY_MS = 5000;
+    int SENSOR_DELAY = SensorManager.SENSOR_DELAY_NORMAL; //SENSOR_DELAY_MS * 1000;
     private SensorManager mSensorManager;
     private Sensor mSensorAccelerometer;
     private Sensor mSensorMagnetometer;
@@ -57,6 +54,9 @@ public class CameraActivity extends Activity implements SensorEventListener {
     private float[] mMagnetometerData = new float[3];
     // stores time -> azimuth (degree) for a whole run of the activity
     private HashMap<Long, Double> azimuthData = new HashMap<Long, Double>();
+    private HashMap<Long, Double> pitchData = new HashMap<Long, Double>();
+    private HashMap<Long, Double> rollData = new HashMap<Long, Double>();
+    private HashMap<Long, Double> cameraAngleData = new HashMap<Long, Double>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,9 +166,18 @@ public class CameraActivity extends Activity implements SensorEventListener {
         float roll = orientationValues[2];
 
         // angle in degree [0 - 360] degree
-        double degrees = (Math.toDegrees(orientationValues[0]) + 360) % 360;
-        // Store azimuth value
-        azimuthData.put(System.currentTimeMillis(), degrees);
+        double degrees = toDegrees(orientationValues[0]); // angle of rotation about the -z axis
+        double pitchDegrees = toDegrees(orientationValues[1]); // angle of rotation about the x axis
+        double rollDegrees = toDegrees(orientationValues[2]); // angle of rotation about the y axis
+
+        // Store sensor values
+        double normDegrees = adjustDegreesToScreenOrientation(degrees);
+        double cameraAngle = adjustCameraAngleOrientation(pitchDegrees, rollDegrees);
+
+        azimuthData.put(System.currentTimeMillis(), normDegrees);
+        pitchData.put(System.currentTimeMillis(), pitchDegrees);
+        rollData.put(System.currentTimeMillis(), rollDegrees);
+        cameraAngleData.put(System.currentTimeMillis(), cameraAngle);
     }
 
 
@@ -210,14 +219,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
             Log.d(TAG, "tmp path: " + cameraFile.getAbsolutePath());
 
             try {
-                long captureTime = cameraFile.lastModified();
-                Log.d(TAG, "CAPTURE TIME: " + captureTime);
-                Log.d(TAG, "NOW TIME: " + System.currentTimeMillis());
-                Log.d(TAG, "DIFF TIME: " + (System.currentTimeMillis() - captureTime));
-                double degrees = getAzimuthByTime(captureTime);
-                EXIFUtils.writeExifGpsDirection(cameraFile.getAbsolutePath(), degrees);
-                EXIFUtils.getExifGpsAttributes(cameraFile.getAbsolutePath()); // TODO remove
-
+                extendGPSExifData(cameraFile.lastModified());
                 copyFile(cameraFile, new File(targetPath, cameraFile.getName()));
                 if (data == null) {
                     data = getIntent();
@@ -235,19 +237,81 @@ public class CameraActivity extends Activity implements SensorEventListener {
             }
 
             // TODO: after copy, verify if is correctly copied and then remove the old one
-            finish();
         }
+        finish();
+
+        // TODO
         azimuthData.clear();
+        pitchData.clear();
+        rollData.clear();
+        cameraAngleData.clear();
     }
 
-    private double getAzimuthByTime(long time) {
-        List<Double> result = azimuthData.entrySet().stream()
+    private void extendGPSExifData(long captureTime) {
+        double degrees = getValueByTime(azimuthData, captureTime);
+        double cameraAngle = getValueByTime(cameraAngleData, captureTime);
+        double pitch = getValueByTime(pitchData, captureTime);
+        double roll = getValueByTime(rollData, captureTime);
+
+        EXIFUtils.writeExifGpsDirection(cameraFile.getAbsolutePath(), degrees, cameraAngle, pitch, roll);
+    }
+
+    private double getValueByTime(HashMap<Long, Double> data, long time) {
+        List<Double> result = data.entrySet().stream()
                 .filter(x -> Math.abs(x.getKey() - time) <= SENSOR_DELAY_MS)
                 .map(x->x.getValue())
                 .collect(Collectors.toList());
         if (result.isEmpty()) return -1;
-        Log.d(TAG, "AZIMUHT DATA: " + result);
         return result.get(0);
+    }
+
+    private double toDegrees(double value) {
+        return (Math.toDegrees(value) + 360) % 360;
+    }
+
+    // Angle of the device according to surface (camera pointing to surface has 0 degree)
+    private double adjustDegreesToScreenOrientation(double degrees) {
+        Display display = ((WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        switch (display.getRotation()) {
+            case Surface.ROTATION_0: {
+                return normalizeDegree(degrees);
+            }
+            case Surface.ROTATION_90: {
+                return normalizeDegree(degrees + 90);
+            }
+            case Surface.ROTATION_180: {
+                return normalizeDegree(degrees + 180);
+            }
+            case Surface.ROTATION_270: {
+                return normalizeDegree(degrees + 270);
+            }
+            default: return degrees;
+        }
+    }
+
+    private double adjustCameraAngleOrientation(double pitch, double roll) {
+        Display display = ((WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        switch (display.getRotation()) {
+            case Surface.ROTATION_0: {
+                return (360 - pitch);
+            }
+            case Surface.ROTATION_90: {
+                return (360 - roll);
+            }
+            case Surface.ROTATION_180: {
+                return pitch;
+            }
+            case Surface.ROTATION_270: {
+                return roll;
+            }
+            default: return pitch;
+        }
+    }
+
+    private double normalizeDegree(double degree) {
+        while (degree > 360)
+            degree = degree - 360;
+        return degree;
     }
 
     private void copyFile(File src, File dst) throws IOException {

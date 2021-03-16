@@ -25,14 +25,19 @@ public class EXIFUtils
     private static final String GPS_LON_TAG = "GPSLongitude";
     private static final String GPS_LAT_TAG = "GPSLatitude";
     private static final String GPS_DATE_TAG = "GPSDateStamp";
+    // Experimental TAGS
+    private static final String CAMERA_ELEVATION_TAG = "CameraElevationAngle";
+    private static final String GPS_ROLL_TAG = "GPSRoll";
+    private static final String GPS_PITCH_TAG = "GPSPitch";
 
-    public static void writeExifGpsDirection(String src, double exifOrientation) {
-        if (exifOrientation >= 0 && exifOrientation <= 360) {
-            HashMap<String, String> attributes = new HashMap<String, String>();
-            attributes.put(GPS_BEARING_TAG, calculateRational(exifOrientation));
-            attributes.put(GPS_BEARING_REF_TAG, "M");
-            writeExifAttributes(src, attributes);
-        }
+    public static void writeExifGpsDirection(String src, double exifOrientation, double cameraAngle, double pitch, double roll) {
+        HashMap<String, String> attributes = new HashMap<String, String>();
+        attributes.put(CAMERA_ELEVATION_TAG, calculateRational(cameraAngle));
+        attributes.put(GPS_PITCH_TAG, calculateRational(pitch));
+        attributes.put(GPS_ROLL_TAG, calculateRational(roll));
+        attributes.put(GPS_BEARING_TAG, calculateRational(exifOrientation));
+        attributes.put(GPS_BEARING_REF_TAG, "M");
+        writeExifAttributes(src, attributes);
     }
 
     public static void writeExifAttributes(String src, HashMap<String, String> attributes) {
@@ -63,6 +68,10 @@ public class EXIFUtils
         exifTags.add(GPS_LAT_TAG);
         exifTags.add(GPS_LON_TAG);
         exifTags.add(GPS_DATE_TAG);
+
+        exifTags.add(GPS_PITCH_TAG);
+        exifTags.add(GPS_ROLL_TAG);
+        exifTags.add(CAMERA_ELEVATION_TAG);
 
         return getEXIFdata(filepath, exifTags);
     }
