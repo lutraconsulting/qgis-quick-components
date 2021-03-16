@@ -266,7 +266,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
     }
 
     private double toDegrees(double value) {
-        return (Math.toDegrees(value) + 360) % 360;
+        return normalizeDegree(Math.toDegrees(value) + 360);
     }
 
     // Angle of the device according to surface (camera pointing to surface has 0 degree)
@@ -309,9 +309,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
     }
 
     private double normalizeDegree(double degree) {
-        while (degree > 360)
-            degree = degree - 360;
-        return degree;
+        return degree % 360;
     }
 
     private void copyFile(File src, File dst) throws IOException {
